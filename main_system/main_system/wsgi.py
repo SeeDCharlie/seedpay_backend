@@ -1,5 +1,5 @@
 """
-WSGI config for ventas_microservice project.
+WSGI config for main_system project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ventas_microservice.settings.settings_dev')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'main_system.settings.settings_dev')
 
 application = get_wsgi_application()
