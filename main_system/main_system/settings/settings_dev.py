@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 ## peticion de configuraciones al servidor de conpfiguracion
-config_client = ConfigClient(app_name='pruebarest', url='http://localhost:8888/mainsystem/default')
+config_client = ConfigClient(app_name='mainsystem', url='http://localhost:8888/mainsystem/default')
 config_client.get_config(auth=HTTPBasicAuth(username='root', password='secret'))
 config=config_client.config['propertySources'][0]['source']
 
@@ -44,7 +44,7 @@ eureka_client.init(eureka_server="http://localhost:8099/eureka",
 print(config)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(config['SECRET_KEY'][1:-1])
-
+#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
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -61,8 +61,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'loginapp',
+    'loginapp.apps.LoginappConfig',
+    'systemapp.apps.SystemappConfig',
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -100,7 +103,16 @@ REST_FRAMEWORK = {
     ]
 }
 
+AUTH_USER_MODEL = 'loginapp.usuario'
+
 WSGI_APPLICATION = 'main_system.wsgi.application'
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
 
 
 # Database
@@ -108,8 +120,12 @@ WSGI_APPLICATION = 'main_system.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config['DB_NAME'] ,
+        'USER': config['DB_USER'],
+        'PASSWORD': config['DB_PASS'],
+        'HOST': config['DB_HOST'],
+        'PORT': config['DB_PORT'],
     }
 }
 
@@ -136,9 +152,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-spa'
 
 TIME_ZONE = 'UTC'
+
+TIME_ZONE = 'Etc/GMT+5'
 
 USE_I18N = True
 
