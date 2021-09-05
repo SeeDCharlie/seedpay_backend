@@ -1,5 +1,5 @@
 from django.db import models
-from main_system.loginapp.models import usuarios
+
 
 # Create your models here.
 
