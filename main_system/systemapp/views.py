@@ -10,38 +10,25 @@ from .serializers import *
 
 # Create your views here.
 
-
-
-
 class UsuarioController(viewsets.ModelViewSet):
-    
-    
     #authentication_class = (TokenAuthentication,)
 
     queryset = usuario.objects.all().order_by('id')
     serializer_class = UsuarioSerializer
 
-class UsuarioDetailCOntroller(viewsets.ModelViewSet):
-
-    queryset = usuario.objects.all().order_by('id')
-    serializer_class = UsuarioSerializer
-
 class NegocioController(viewsets.ModelViewSet):
-    
     #authentication_class = (TokenAuthentication,)
 
     queryset = negocio.objects.all().order_by('id')
     serializer_class = NegocioSerializer
 
 class ProductoController(viewsets.ModelViewSet):
-    
     #authentication_class = (TokenAuthentication,)
 
     queryset = producto.objects.all().order_by('id')
     serializer_class = ProductoSerializer
 
 class ServicioController(viewsets.ModelViewSet):
-    
     #authentication_class = (TokenAuthentication,)
 
     queryset = servicio.objects.all().order_by('id')
