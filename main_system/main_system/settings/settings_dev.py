@@ -38,10 +38,6 @@ eureka_client.init(eureka_server="http://localhost:8099/eureka",
                    app_name="mainsystem")"""
 
 #registro con pyactuator
-
-
-
-print(config)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(config['SECRET_KEY'][1:-1])
 #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
@@ -61,8 +57,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'loginapp.apps.LoginappConfig',
     'systemapp.apps.SystemappConfig',
+
 ]
 
 
@@ -98,9 +96,14 @@ TEMPLATES = [
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ]    
+
 }
 
 AUTH_USER_MODEL = 'loginapp.usuario'

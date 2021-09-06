@@ -5,5 +5,6 @@ from .serializer import UsuarioSerializer
 
 
 class UsuarioController(viewsets.ModelViewSet):
-    queryset = usuario.objects.all()
+    
+    queryset = usuario.objects.all().order_by('id')
     serializer_class = UsuarioSerializer
