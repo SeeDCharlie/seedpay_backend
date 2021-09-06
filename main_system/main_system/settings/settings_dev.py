@@ -93,7 +93,7 @@ TEMPLATES = [
     },
 ]
 
-REST_FRAMEWORK = {
+"""REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -104,7 +104,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]    
 
-}
+}"""
 
 AUTH_USER_MODEL = 'loginapp.usuario'
 
