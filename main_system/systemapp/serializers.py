@@ -12,12 +12,12 @@ class ProductoSerializer(serializers.ModelSerializer):
 
 
     class Meta:
-        model = negocio
+        model = producto
         fields = ['nombre', 'descripcion', 'precio', 'negocio', 'disponible']
 
 class ServicioSerializer(serializers.ModelSerializer):
 
 
     class Meta:
-        model = negocio
+        model = servicio
         fields = ['nombre', 'descripcion', 'precio', 'negocio', 'disponible']

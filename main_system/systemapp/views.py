@@ -29,11 +29,11 @@ class ProductoController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
 
     queryset = producto.objects.all().order_by('id')
-    serializer_class = NegocioSerializer
+    serializer_class = ProductoSerializer
 
 class ServicioController(viewsets.ModelViewSet):
     
     #authentication_class = (TokenAuthentication,)
 
     queryset = servicio.objects.all().order_by('id')
-    serializer_class = NegocioSerializer
+    serializer_class = ServicioSerializer
