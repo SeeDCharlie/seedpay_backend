@@ -4,9 +4,13 @@ from .models import *
 from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from loginapp.serializer import UsuarioSerializer
+from loginapp.models import usuario
 from .serializers import *
 
+
 # Create your views here.
+
+
 
 
 class UsuarioController(viewsets.ModelViewSet):

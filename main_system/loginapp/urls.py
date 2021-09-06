@@ -8,5 +8,5 @@ from .views import *
 
 urlpatterns = [
     #path('', include(router.urls) ),
-    path('token-auth/', views.obtain_auth_token),
+    path('token-auth/', GenerateToken.as_view() ),
 ]

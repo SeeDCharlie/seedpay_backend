@@ -12,4 +12,4 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = usuario
-        fields = ['id','nombre', 'apellido', 'direccion', 'email', 'celular', 'telfijo', 'identificacion', 'tipo_identificacion', 'password' ]
+        fields = ['id','nombre', 'apellido', 'direccion', 'email', 'celular', 'telfijo', 'identificacion', 'tipo_identificacion', 'password', 'token' ]
