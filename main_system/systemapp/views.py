@@ -15,11 +15,16 @@ from .serializers import *
 
 class UsuarioController(viewsets.ModelViewSet):
     
-    authentication_class = (TokenAuthentication,)
+    
+    #authentication_class = (TokenAuthentication,)
 
     queryset = usuario.objects.all().order_by('id')
     serializer_class = UsuarioSerializer
 
+class UsuarioDetailCOntroller(viewsets.ModelViewSet):
+
+    queryset = usuario.objects.all().order_by('id')
+    serializer_class = UsuarioSerializer
 
 class NegocioController(viewsets.ModelViewSet):
     

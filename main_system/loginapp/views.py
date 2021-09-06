@@ -21,8 +21,7 @@ class GenerateToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        #,{'token': token.key, 'id': user.pk, 'email': user.email, 'nombre': user. }
-        user.token = token
+        print(str(created))
         userSerializer = UsuarioSerializer(user)
         return Response(userSerializer.data )
 
