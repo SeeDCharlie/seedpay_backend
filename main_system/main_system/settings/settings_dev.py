@@ -93,7 +93,7 @@ TEMPLATES = [
     },
 ]
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 
 """REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
