@@ -3,13 +3,11 @@ from .models import *
 
 class NegocioSerializer(serializers.ModelSerializer):
 
-
     class Meta:
         model = negocio
         fields = ['id','nombre', 'descripcion', 'nit', 'usuario' ]
 
 class ProductoSerializer(serializers.ModelSerializer):
-
 
     class Meta:
         model = producto
