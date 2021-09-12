@@ -9,4 +9,5 @@ from .views import *
 urlpatterns = [
     #path('', include(router.urls) ),
     path('token-auth/', GenerateToken.as_view() ),
+    path('logout/', logOut , name='logout'),
 ]
