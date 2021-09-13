@@ -45,6 +45,8 @@ class cuenta(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=200)
     tipo_cuenta = models.ForeignKey('tipo_cuenta', models.DO_NOTHING)
+    fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
+    fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
 
     def __str__(self):
         return self.nombre
@@ -71,6 +73,13 @@ class negocio(models.Model):
     descripcion = models.CharField(max_length=200)
     nit = models.CharField(max_length=100)
     usuario = models.ForeignKey('loginapp.usuario', models.DO_NOTHING, null=True)
+    telefono = models.IntegerField(default=0)
+    telefono1 = models.IntegerField(blank=True,null=True)
+    telefono2 = models.IntegerField(blank=True,null = True)
+    direccion = models.CharField(max_length=100, default="")
+
+    fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
+    fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
 
     def __str__(self):
         return self.nombre
@@ -86,7 +95,7 @@ class producto(models.Model):
     precio = models.DecimalField(max_digits=15, decimal_places=2)
     disponible = models.BooleanField(default=False)
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
-    fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
+    fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
 
     def __str__(self):
@@ -103,7 +112,7 @@ class servicio(models.Model):
     precio = models.DecimalField(max_digits=15, decimal_places=2)
     disponible = models.BooleanField(default=False)
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
-    fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
+    fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
 
     def __str__(self):
