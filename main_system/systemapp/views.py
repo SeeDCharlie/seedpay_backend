@@ -33,3 +33,21 @@ class ServicioController(viewsets.ModelViewSet):
 
     queryset = servicio.objects.all().order_by('id')
     serializer_class = ServicioSerializer
+
+class TipoUsuarioController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+
+    queryset = tipo_usuario.objects.all().order_by('id')
+    serializer_class = TipoUsuarioSerializer
+
+class TipoEmpleadoController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+
+    queryset = tipo_empleado.objects.all().order_by('id')
+    serializer_class = TipoEmpleadoSerializer
+
+class TipoIdentificacionController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+
+    queryset = tipo_identificacion.objects.all().order_by('id')
+    serializer_class = TipoIdentificacionSerializer

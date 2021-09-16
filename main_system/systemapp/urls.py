@@ -4,11 +4,12 @@ from .views import *
 
 router = routers.DefaultRouter()
 router.register(r'usuarios', UsuarioController)
-
 router.register(r'negocio', NegocioController)
 router.register(r'producto', ProductoController)
 router.register(r'servicio', ServicioController)
-
+router.register(r'tipoUsuario', TipoUsuarioController)
+router.register(r'tipoEmpleado', TipoEmpleadoController)
+router.register(r'tipoIdentificacion', TipoIdentificacionController)
 
 urlpatterns = [
     path('', include(router.urls) ),
