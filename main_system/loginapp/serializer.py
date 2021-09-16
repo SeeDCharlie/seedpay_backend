@@ -14,4 +14,4 @@ class UsuarioSerializer(serializers.ModelSerializer):
         model = usuario
         fields = ['id','nombre', 'apellido', 'direccion', 'email', 'celular', 'identificacion',
          'tipo_identificacion', 'password', 'fecha_creacion', 'fecha_modificacion', 'imagen_64', 
-         'token', 'cuenta', 'tipo_usuario', 'tipo_empleado' ]
+         'token', 'cuenta', 'tipo_usuario', 'tipo_empleado', 'ciudad' ]

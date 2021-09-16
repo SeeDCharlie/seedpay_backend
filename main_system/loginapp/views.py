@@ -22,8 +22,7 @@ class GenerateToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         userDos = authenticate(request, username=user.email, password=user.password)
-        if user :
-            
+        if user :  
             token, created = Token.objects.get_or_create(user=user)
             user.token=token
             userSerializer = UsuarioSerializer(user)
@@ -31,9 +30,6 @@ class GenerateToken(ObtainAuthToken):
             return Response(userSerializer.data)
         return Response({'msj':'credenciales incorrectas'}, status=400)
 
-"""
-'csrftoken=vEne3E9NJYOVkRpLvAnbpqz5pl8Nc1STeUOFVWNlGoA9nUilZMwThPDuXuoNnw1O; sessionid=fwqw6d5k64d51c0m2oq5azjns843ija3'}
-"""
 @api_view(('GET',))
 def logOut( request):
     if request.user.is_authenticated :
