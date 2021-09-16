@@ -24,7 +24,7 @@ class usuario(AbstractBaseUser, PermissionsMixin):
     identificacion = models.DecimalField(max_digits=13, decimal_places=0, null=True)
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
-    email = models.CharField(unique=True, max_length=100)
+    email = models.EmailField(unique=True, max_length=100)
     celular = models.DecimalField(max_digits=10, decimal_places=0, null=True)
     direccion = models.CharField(max_length=50, null=True)
     imagen_64 = models.TextField(null = True)

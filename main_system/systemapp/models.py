@@ -100,6 +100,7 @@ class negocio(models.Model):
     telefono = models.IntegerField(default=0)
     telefono1 = models.IntegerField(blank=True,null=True)
     telefono2 = models.IntegerField(blank=True,null = True)
+    correo = models.EmailField(max_length=250)
     direccion = models.CharField(max_length=100, default="")
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)

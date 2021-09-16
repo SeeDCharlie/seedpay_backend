@@ -5,7 +5,7 @@ class NegocioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = negocio
-        fields = ['id','nombre', 'descripcion', 'nit', 'usuario' ]
+        fields = ['id','nombre', 'descripcion', 'nit', 'usuario', 'telefono', 'telefono1', 'telefono2', 'correo', 'direccion' ]
 
 class ProductoSerializer(serializers.ModelSerializer):
 
