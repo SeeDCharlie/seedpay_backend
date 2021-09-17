@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from loginapp.serializer import UsuarioSerializer
 from loginapp.models import usuario
+from rest_framework.decorators import action
 from .serializers import *
 
 
