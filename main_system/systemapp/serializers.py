@@ -5,19 +5,19 @@ class NegocioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = negocio
-        fields = ['id','nombre', 'descripcion', 'nit', 'usuario', 'telefono', 'telefono1', 'telefono2', 'correo', 'direccion' ]
+        fields = ['id','nombre', 'descripcion', 'usuario', 'telefono', 'telefono1', 'telefono2', 'correo', 'direccion' ]
 
 class ProductoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = producto
-        fields = ['id','nombre', 'descripcion', 'precio', 'negocio', 'disponible']
+        fields = ['id','nombre', 'descripcion', 'precio', 'negocio', 'disponible', 'categorias']
 
 class ServicioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = servicio
-        fields = ['id','nombre', 'descripcion', 'precio', 'negocio', 'disponible']
+        fields = ['id','nombre', 'descripcion', 'precio', 'negocio', 'disponible', 'categorias']
 
 class TipoUsuarioSerializer(serializers.ModelSerializer):
 

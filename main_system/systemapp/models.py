@@ -93,9 +93,8 @@ class tipo_cuenta(models.Model):
         verbose_name_plural = "tipos de cuentas"
 
 class negocio(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=70)
     descripcion = models.CharField(max_length=200)
-    nit = models.CharField(max_length=100)
     usuario = models.ForeignKey('loginapp.usuario', models.DO_NOTHING, null=True)
     telefono = models.IntegerField(default=0)
     telefono1 = models.IntegerField(blank=True,null=True)
@@ -115,7 +114,7 @@ class negocio(models.Model):
         verbose_name_plural = "negocios"
 
 class producto(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=70)
     descripcion = models.CharField(max_length=200)
     precio = models.DecimalField(max_digits=15, decimal_places=2)
     disponible = models.BooleanField(default=False)
