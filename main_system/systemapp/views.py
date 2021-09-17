@@ -19,7 +19,6 @@ class UsuarioController(viewsets.ModelViewSet):
 
 class NegocioController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
-
     queryset = negocio.objects.all().order_by('id')
     serializer_class = NegocioSerializer
     filter_backends = [DjangoFilterBackend]
@@ -32,6 +31,8 @@ class ProductoController(viewsets.ModelViewSet):
 
     queryset = producto.objects.all().order_by('id')
     serializer_class = ProductoSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['negocio', 'nombre']
 
 class ServicioController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
