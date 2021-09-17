@@ -101,6 +101,7 @@ class negocio(models.Model):
     telefono2 = models.DecimalField(max_digits=10, decimal_places=0,blank=True,null = True)
     correo = models.EmailField(max_length=250)
     direccion = models.CharField(max_length=100, null=True)
+    imagen_64 = models.TextField(null = True)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
@@ -122,7 +123,7 @@ class producto(models.Model):
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
     categorias = models.ManyToManyField(categoria_productos)
-
+    imagen_64 = models.TextField(null = True)
     def __str__(self):
         return self.nombre
 
@@ -140,7 +141,8 @@ class servicio(models.Model):
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
     categorias = models.ManyToManyField(categoria_servicios)
-
+    imagen_64 = models.TextField(null = True)
+    
     def __str__(self):
         return self.nombre
 
