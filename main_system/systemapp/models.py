@@ -100,7 +100,7 @@ class negocio(models.Model):
     telefono1 = models.DecimalField(max_digits=10, decimal_places=0,blank=True,null=True)
     telefono2 = models.DecimalField(max_digits=10, decimal_places=0,blank=True,null = True)
     correo = models.EmailField(max_length=250)
-    direccion = models.CharField(max_length=100, default="", null=True)
+    direccion = models.CharField(max_length=100, null=True)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
