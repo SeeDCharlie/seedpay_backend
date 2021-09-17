@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'loginapp.apps.LoginappConfig',
     'systemapp.apps.SystemappConfig',
     'corsheaders',
+    'django_filters',
 
 ]
 
@@ -99,6 +100,9 @@ TEMPLATES = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 """REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
