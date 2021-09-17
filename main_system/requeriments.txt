@@ -21,3 +21,4 @@ urllib3==1.26.6
 psycopg2-binary==2.9.1
 argon2-cffi==21.1.0
 django-cors-headers==3.8.0
+django-filter==2.4.0

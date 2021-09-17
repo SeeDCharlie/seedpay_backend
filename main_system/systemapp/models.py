@@ -93,15 +93,15 @@ class tipo_cuenta(models.Model):
         verbose_name_plural = "tipos de cuentas"
 
 class negocio(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=70)
     descripcion = models.CharField(max_length=200)
-    nit = models.CharField(max_length=100)
     usuario = models.ForeignKey('loginapp.usuario', models.DO_NOTHING, null=True)
-    telefono = models.IntegerField(default=0)
-    telefono1 = models.IntegerField(blank=True,null=True)
-    telefono2 = models.IntegerField(blank=True,null = True)
+    telefono = models.DecimalField(max_digits=10, decimal_places=0, default=0)
+    telefono1 = models.DecimalField(max_digits=10, decimal_places=0,blank=True,null=True)
+    telefono2 = models.DecimalField(max_digits=10, decimal_places=0,blank=True,null = True)
     correo = models.EmailField(max_length=250)
-    direccion = models.CharField(max_length=100, default="")
+    direccion = models.CharField(max_length=100, null=True)
+    imagen_64 = models.TextField(null = True)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
@@ -115,7 +115,7 @@ class negocio(models.Model):
         verbose_name_plural = "negocios"
 
 class producto(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=70)
     descripcion = models.CharField(max_length=200)
     precio = models.DecimalField(max_digits=15, decimal_places=2)
     disponible = models.BooleanField(default=False)
@@ -123,7 +123,7 @@ class producto(models.Model):
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
     categorias = models.ManyToManyField(categoria_productos)
-
+    imagen_64 = models.TextField(null = True)
     def __str__(self):
         return self.nombre
 
@@ -141,7 +141,8 @@ class servicio(models.Model):
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
     categorias = models.ManyToManyField(categoria_servicios)
-
+    imagen_64 = models.TextField(null = True)
+    
     def __str__(self):
         return self.nombre
 
