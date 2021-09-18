@@ -29,6 +29,7 @@ class categoria_negocio(models.Model):
 class categoria_servicios(models.Model):
     nombre = models.CharField(max_length=80)
     descripcion = models.CharField(max_length=200)
+    cat_negocio = models.ForeignKey(categoria_negocio, models.DO_NOTHING)
 
     def __str__(self):
         return self.nombre
@@ -42,6 +43,7 @@ class categoria_servicios(models.Model):
 class categoria_productos(models.Model):
     nombre = models.CharField(max_length=80)
     descripcion = models.CharField(max_length=200)
+    cat_negocio = models.ForeignKey(categoria_negocio, models.DO_NOTHING)
 
     def __str__(self):
         return self.nombre
@@ -126,6 +128,8 @@ class negocio(models.Model):
     direccion = models.CharField(max_length=100, null=True)
     ciudad = models.ForeignKey('ciudad', models.DO_NOTHING, null=True)
     imagen_64 = models.TextField(null = True)
+    negocio_ciiu= models.ManyToManyField(CIIU)
+    categorias = models.ManyToManyField(categoria_negocio)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
@@ -179,7 +183,7 @@ class servicio(models.Model):
 
 class ciudad(models.Model):
     nombre = models.CharField(max_length=150)
-    departamento = models.ForeignKey('departamento', models.DO_NOTHING, db_column='departamento' )
+    departamento = models.ForeignKey('departamento', models.DO_NOTHING, db_column='departamento_id', null = True)
 
     def __str__(self):
         return self.nombre
