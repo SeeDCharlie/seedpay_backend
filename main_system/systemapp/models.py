@@ -2,6 +2,19 @@ from django.db import models
 
 
 # Create your models here.
+
+class metodo_pago(models.Model):
+    cod = models.CharField(max_length=6)
+    nombre = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.cod + ' * ' + self.nombre
+
+    class Meta:
+        db_table = 'metodo_pago'
+        verbose_name = "metodo de pago"
+        verbose_name_plural = "metodos de pago"
+
 class CIIU(models.Model):
     ciiu = models.CharField(max_length=7, unique=True)
     descripcion = models.CharField(max_length=500)
@@ -128,8 +141,8 @@ class negocio(models.Model):
     direccion = models.CharField(max_length=100, null=True)
     ciudad = models.ForeignKey('ciudad', models.DO_NOTHING, null=True)
     imagen_64 = models.TextField(null = True)
-    negocio_ciiu= models.ManyToManyField(CIIU)
-    categorias = models.ManyToManyField(categoria_negocio, null=True)
+    negocio_ciiu= models.ManyToManyField(CIIU,blank=True )
+    categorias = models.ManyToManyField(categoria_negocio,blank=True)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
@@ -204,3 +217,42 @@ class departamento(models.Model):
         db_table = 'departamento'
         verbose_name = "departamento"
         verbose_name_plural = "departamentos"
+
+class factura(models.Model):
+
+    cliente = models.ForeignKey('loginapp.usuario', models.DO_NOTHING)
+
+
+    negocio = models.ForeignKey('negocio', models.DO_NOTHING)
+
+    valor_recibido = models.DecimalField(max_digits=15, decimal_places=2, null = True)
+    valor_devuelto = models.DecimalField(max_digits=15, decimal_places=2, null = True)
+    valor_total = models.DecimalField(max_digits=15, decimal_places = 2, null = True)
+    metodo_pago = models.ForeignKey('metodo_pago', models.DO_NOTHING)
+
+    fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
+    fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
+
+    def __str__(self):
+        return str(self.cliente.identificacion) + ' | ' + str(self.id)
+
+    class Meta:
+        db_table = 'factura'
+        verbose_name = "factura"
+        verbose_name_plural = "facturas"
+
+class carrito_compra(models.Model):
+    fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
+    fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
+    productos = models.ManyToManyField(producto)
+    servicios = models.ManyToManyField(servicio)
+    facturas = models.ManyToManyField(factura)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        db_table = 'carrito_compra'
+        verbose_name = "carrito de compra"
+        verbose_name_plural = "carritos de compra"
+
