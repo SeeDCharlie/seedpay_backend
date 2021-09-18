@@ -142,7 +142,7 @@ class negocio(models.Model):
     ciudad = models.ForeignKey('ciudad', models.DO_NOTHING, null=True)
     imagen_64 = models.TextField(null = True)
     negocio_ciiu= models.ManyToManyField(CIIU,blank=True )
-    categorias = models.ManyToManyField(categoria_negocio,blank=True)
+    categorias = models.ManyToManyField(categoria_negocio, blank=True)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
@@ -220,8 +220,9 @@ class departamento(models.Model):
 
 class factura(models.Model):
 
-    cliente = models.ForeignKey('loginapp.usuario', models.DO_NOTHING)
-
+    cliente = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, related_name='cliente')
+    domiciliario = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, null = True, related_name='domiciliario')
+    vendedor = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, null = True, related_name='vendedor')
 
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
 
