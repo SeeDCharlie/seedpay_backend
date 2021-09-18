@@ -1,0 +1,46 @@
+CREATE TABLE ciudad(
+   departamento INTEGER  NOT NULL
+  ,nombre       VARCHAR(14) NOT NULL
+);
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'El Dovio');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Roldanillo');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Argelia');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Sevilla');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Zarzal');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'El Cerrito');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Cartago');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Caicedonia');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'El Cairo');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'La Unión');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Restrepo');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Dagua');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Guacarí');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Ansermanuevo');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Bugalagrande');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'La Victoria');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Ginebra');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Yumbo');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Obando');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Bolívar');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Cali');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'San Pedro');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Guadalajara de Buga');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Calima');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Andalucía');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Pradera');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Yotoco');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Palmira');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Riofrío');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Alcalá');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Versalles');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'El Águila');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Toro');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Candelaria');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'La Cumbre');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Ulloa');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Trujillo');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Vijes');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Tuluá');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Florida');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Jamundí');
+INSERT INTO ciudad(departamento,nombre) VALUES (1,'Buenaventura');

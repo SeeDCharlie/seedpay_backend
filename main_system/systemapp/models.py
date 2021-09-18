@@ -2,6 +2,29 @@ from django.db import models
 
 
 # Create your models here.
+class CIIU(models.Model):
+    ciiu = models.CharField(max_length=7, unique=True)
+    descripcion = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.ciiu + ' * ' + self.descripcion
+
+    class Meta:
+        db_table = 'CIIU'
+        verbose_name = "categoria de producto"
+        verbose_name_plural = "categorias de producto"
+
+class categoria_negocio(models.Model):
+    nombre = models.CharField(max_length=80)
+    descripcion = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        db_table = 'categoria_negocio'
+        verbose_name = "categoria de negocio"
+        verbose_name_plural = "categorias de servicio"
 
 class categoria_servicios(models.Model):
     nombre = models.CharField(max_length=80)
@@ -101,6 +124,7 @@ class negocio(models.Model):
     telefono2 = models.DecimalField(max_digits=10, decimal_places=0,blank=True,null = True)
     correo = models.EmailField(max_length=250)
     direccion = models.CharField(max_length=100, null=True)
+    ciudad = models.ForeignKey('ciudad', models.DO_NOTHING, null=True)
     imagen_64 = models.TextField(null = True)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
@@ -155,7 +179,7 @@ class servicio(models.Model):
 
 class ciudad(models.Model):
     nombre = models.CharField(max_length=150)
-    departamento = models.ForeignKey('departamento', models.DO_NOTHING)
+    departamento = models.ForeignKey('departamento', models.DO_NOTHING, db_column='departamento' )
 
     def __str__(self):
         return self.nombre

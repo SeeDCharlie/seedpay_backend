@@ -12,6 +12,9 @@ router.register(r'tipoEmpleado', TipoEmpleadoController)
 router.register(r'tipoIdentificacion', TipoIdentificacionController)
 router.register(r'categoriaServicio', CategoriaServicioController)
 router.register(r'categoriaProducto', CategoriaProductoController)
+router.register(r'ciiu', CiiuController)
+router.register(r'ciudad', CiudadController)
+router.register(r'departamento', DepartamentoController)
 
 urlpatterns = [
     path('', include(router.urls) ),

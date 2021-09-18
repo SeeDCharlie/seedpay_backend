@@ -71,3 +71,21 @@ class CategoriaProductoController(viewsets.ModelViewSet):
 
     queryset = categoria_productos.objects.all().order_by('id')
     serializer_class = CategoriaProductoSerializer
+
+class CiiuController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+
+    queryset = CIIU.objects.all().order_by('id')
+    serializer_class = CiiuSerializer
+
+class CiudadController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+
+    queryset = ciudad.objects.all().order_by('id')
+    serializer_class = CiudadSerializer
+
+class DepartamentoController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+
+    queryset = departamento.objects.all().order_by('id')
+    serializer_class = DepartamentoSerializer

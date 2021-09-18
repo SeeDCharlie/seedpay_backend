@@ -48,3 +48,21 @@ class CategoriaProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = categoria_productos
         fields = ['id','nombre', 'descripcion']
+
+class CiiuSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CIIU
+        fields = ['id','ciiu', 'descripcion']
+
+class CiudadSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ciudad
+        fields = ['id','nombre', 'departamento']
+
+class DepartamentoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = departamento
+        fields = ['id','nombre']
