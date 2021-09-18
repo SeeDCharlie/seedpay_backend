@@ -163,7 +163,7 @@ class producto(models.Model):
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
-    categorias = models.ManyToManyField(categoria_productos)
+    categorias = models.ManyToManyField(categoria_productos, blank=True)
 
     imagen_64 = models.TextField(null = True)
     def __str__(self):
@@ -182,7 +182,7 @@ class servicio(models.Model):
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
-    categorias = models.ManyToManyField(categoria_servicios)
+    categorias = models.ManyToManyField(categoria_servicios, blank=True)
     imagen_64 = models.TextField(null = True)
     
     def __str__(self):
