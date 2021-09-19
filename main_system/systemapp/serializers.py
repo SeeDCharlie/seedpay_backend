@@ -67,3 +67,21 @@ class DepartamentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = departamento
         fields = ['id','nombre']
+
+class CarritoComprasSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = carrito_compra
+        fields = '__all__'
+
+class FacturaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = factura
+        fields = '__all__'
+
+class MetodoPagoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = metodo_pago
+        fields = '__all__'

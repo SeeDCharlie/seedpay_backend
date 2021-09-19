@@ -243,11 +243,12 @@ class factura(models.Model):
         verbose_name_plural = "facturas"
 
 class carrito_compra(models.Model):
+    productos = models.ManyToManyField(producto, blank=True)
+    servicios = models.ManyToManyField(servicio, blank=True)
+    facturas = models.ManyToManyField(factura, blank=True)
+
     fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
-    productos = models.ManyToManyField(producto)
-    servicios = models.ManyToManyField(servicio)
-    facturas = models.ManyToManyField(factura)
 
     def __str__(self):
         return self.nombre
@@ -256,4 +257,3 @@ class carrito_compra(models.Model):
         db_table = 'carrito_compra'
         verbose_name = "carrito de compra"
         verbose_name_plural = "carritos de compra"
-

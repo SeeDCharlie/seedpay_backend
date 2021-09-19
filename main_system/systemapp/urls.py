@@ -15,6 +15,9 @@ router.register(r'categoriaProducto', CategoriaProductoController)
 router.register(r'ciiu', CiiuController)
 router.register(r'ciudad', CiudadController)
 router.register(r'departamento', DepartamentoController)
+router.register(r'carritoCompra', CarritoComprasController)
+router.register(r'factura', FacturaController)
+router.register(r'metodoPago', MetodoPagoController)
 
 urlpatterns = [
     path('', include(router.urls) ),

@@ -86,6 +86,21 @@ class CiudadController(viewsets.ModelViewSet):
 
 class DepartamentoController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
-
     queryset = departamento.objects.all().order_by('id')
     serializer_class = DepartamentoSerializer
+
+class CarritoComprasController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+    queryset = carrito_compra.objects.all().order_by('id')
+    serializer_class = CarritoComprasSerializer
+
+class FacturaController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+    queryset = factura.objects.all().order_by('id')
+    serializer_class = FacturaSerializer
+
+
+class MetodoPagoController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+    queryset = metodo_pago.objects.all().order_by('id')
+    serializer_class = MetodoPagoSerializer

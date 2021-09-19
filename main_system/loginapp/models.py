@@ -36,6 +36,7 @@ class usuario(AbstractBaseUser, PermissionsMixin):
     tipo_empleado = models.ForeignKey('systemapp.tipo_empleado', models.DO_NOTHING, null=True)
     cuenta = models.ForeignKey('systemapp.cuenta', models.DO_NOTHING, null=True)
     ciudad = models.ForeignKey('systemapp.ciudad', models.DO_NOTHING, null=True)
+    activo = models.BooleanField(default=True, blank=True)
     
     usuario_administrador = models.BooleanField(default=False)
     objects = usersManager()
