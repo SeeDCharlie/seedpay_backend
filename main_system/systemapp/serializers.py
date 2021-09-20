@@ -38,6 +38,12 @@ class TipoEmpleadoSerializer(serializers.ModelSerializer):
         model = tipo_empleado
         fields = ['id','nombre', 'descripcion']
 
+class CategoriaNegocioSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = categoria_negocio
+        fields = '__all__'
+
 class CategoriaServicioSerializer(serializers.ModelSerializer):
 
     class Meta:

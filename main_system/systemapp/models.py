@@ -143,6 +143,7 @@ class negocio(models.Model):
     imagen_64 = models.TextField(null = True)
     negocio_ciiu= models.ManyToManyField(CIIU,blank=True )
     categorias = models.ManyToManyField(categoria_negocio, blank=True)
+    calificacion =  models.DecimalField(max_digits=2, decimal_places= 1, blank=True, null=True, default=5)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
@@ -162,9 +163,9 @@ class producto(models.Model):
     disponible = models.BooleanField(default=False)
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
-    negocio = models.ForeignKey('negocio', models.DO_NOTHING)
+    negocio = models.ForeignKey('negocio', models.DO_NOTHING, blank=True)
     categorias = models.ManyToManyField(categoria_productos, blank=True)
-
+    calificacion =  models.DecimalField(max_digits=2, decimal_places= 1, blank=True, null=True, default=5)
     imagen_64 = models.TextField(null = True)
     def __str__(self):
         return self.nombre
@@ -175,16 +176,16 @@ class producto(models.Model):
         verbose_name_plural = "productos"
 
 class servicio(models.Model):
-    nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=200)
-    precio = models.DecimalField(max_digits=15, decimal_places=2)
-    disponible = models.BooleanField(default=False)
+    nombre = models.CharField(max_length=50, blank=True)
+    descripcion = models.CharField(max_length=200, blank=True)
+    precio = models.DecimalField(max_digits=15, decimal_places=2, blank=True)
+    disponible = models.BooleanField(default=False, blank=True)
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
-    negocio = models.ForeignKey('negocio', models.DO_NOTHING)
+    negocio = models.ForeignKey('negocio', models.DO_NOTHING, blank=True)
     categorias = models.ManyToManyField(categoria_servicios, blank=True)
-    imagen_64 = models.TextField(null = True)
-    
+    imagen_64 = models.TextField(null = True, blank=True)
+    calificacion =  models.DecimalField(max_digits=2, decimal_places= 1, blank=True, null=True, default=5)
     def __str__(self):
         return self.nombre
 
@@ -221,14 +222,14 @@ class departamento(models.Model):
 class factura(models.Model):
 
     cliente = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, related_name='cliente')
-    domiciliario = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, null = True, related_name='domiciliario')
-    vendedor = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, null = True, related_name='vendedor')
+    domiciliario = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, blank=True, null = True, related_name='domiciliario')
+    vendedor = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT,blank=True, null = True, related_name='vendedor')
 
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
 
-    valor_recibido = models.DecimalField(max_digits=15, decimal_places=2, null = True)
-    valor_devuelto = models.DecimalField(max_digits=15, decimal_places=2, null = True)
-    valor_total = models.DecimalField(max_digits=15, decimal_places = 2, null = True)
+    valor_recibido = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)
+    valor_devuelto = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)
+    valor_total = models.DecimalField(max_digits=15, decimal_places = 2, blank=True,null = True)
     metodo_pago = models.ForeignKey('metodo_pago', models.DO_NOTHING)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)

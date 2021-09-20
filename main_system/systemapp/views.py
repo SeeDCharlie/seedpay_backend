@@ -23,7 +23,7 @@ class NegocioController(viewsets.ModelViewSet):
     queryset = negocio.objects.all().order_by('id')
     serializer_class = NegocioSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['usuario', 'nombre']
+    filterset_fields = ['usuario', 'nombre', 'categorias__nombre']
 
 
 class ProductoController(viewsets.ModelViewSet):
@@ -104,3 +104,8 @@ class MetodoPagoController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
     queryset = metodo_pago.objects.all().order_by('id')
     serializer_class = MetodoPagoSerializer
+
+class CategoriaNegocioController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+    queryset = categoria_negocio.objects.all().order_by('id')
+    serializer_class = CategoriaNegocioSerializer
