@@ -46,7 +46,7 @@ class CiiuSerializer(serializers.ModelSerializer):
 
 
 class NegocioSerializer(serializers.ModelSerializer):
-    negocio_ciiu = CiiuSerializer(many=True)
+    negocio_ciiu = CiiuSerializer(many=True, blank=True)
     categorias = CategoriaNegocioSerializer( many=True)
 
     class Meta:

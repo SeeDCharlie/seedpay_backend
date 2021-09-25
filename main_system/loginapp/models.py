@@ -27,7 +27,7 @@ class usuario(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, max_length=100)
     celular = models.DecimalField(max_digits=10, decimal_places=0, null=True)
     direccion = models.CharField(max_length=50, null=True)
-    imagen_64 = models.TextField(null = True)
+    imagen_64 = models.CharField(max_length=200,null = True)
     token = models.CharField(max_length=300, blank=True, null=True)
     fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
