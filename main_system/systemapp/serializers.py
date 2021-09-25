@@ -46,13 +46,13 @@ class CiiuSerializer(serializers.ModelSerializer):
 
 
 class NegocioSerializer(serializers.ModelSerializer):
-    negocio_ciiu = CiiuSerializer(many=True )
-    categorias = CategoriaNegocioSerializer( many=True)
+    # negocio_ciiu = CiiuSerializer(many=True )
+    # categorias = CategoriaNegocioSerializer( many=True)
 
     class Meta:
         model = negocio
         fields = ['id','nombre', 'descripcion', 'usuario', 'telefono', 'telefono1',
-         'telefono2', 'correo', 'direccion', 'imagen_64', 'negocio_ciiu', 'categorias' ]
+         'telefono2', 'correo', 'direccion', 'imagen_64', 'negocio_ciiu', 'ciudad', 'categorias' ]
 
 class ProductoSerializer(serializers.ModelSerializer):
     categorias = CategoriaProductoSerializer( many=True)
