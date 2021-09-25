@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from loginapp.models import usuario
 from .models import *
-from rest_framework import viewsets
+from rest_framework import viewsets, filters, generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from loginapp.serializer import UsuarioSerializer
 from loginapp.models import usuario
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from .serializers import *
 
 
