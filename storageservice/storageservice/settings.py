@@ -11,22 +11,31 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from requests.auth import HTTPBasicAuth
+from requests.auth import HTTPDigestAuth
+from config.spring import ConfigClient
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+## peticion de configuraciones al servidor de conpfiguracion
+config_client = ConfigClient(app_name='sourceservice', url='http://localhost:8888/sourceservice/default')
+config_client.get_config(auth=HTTPBasicAuth(username='root', password='secret'))
+config=config_client.config['propertySources'][0]['source']
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@(b=4a(vzutdc@cq_*wlzfrnuu)*7!c4=!y%mb96v8y&*7lydg'
+SECRET_KEY = str(config['SECRET_KEY'][1:-1])
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
+#credenciales y datos aws
+ACCESS_KEY_ID=config['ACCESS_KEY_ID']
+SECRET_ACCESS_KEY=str(config['SECRET_ACCESS_KEY'][1:-1])
+BUCKET_IMAGENES=config['BUCKET_IMAGENES']
 
 # Application definition
 
@@ -37,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

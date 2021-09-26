@@ -3,40 +3,42 @@ from django.http import JsonResponse
 from botocore.exceptions import NoCredentialsError
 import requests
 import mimetypes
+from rest_framework import views
+from rest_framework.response import Response
+from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser
 from django.views.decorators.csrf import csrf_exempt
-
-ACCESS_KEY_ID = 'AKIA6CKUFVDMBKWKTXE2'
-SECRET_ACCESS_KEY = '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'
-BUCKET_NAME ='seedpaybuck'
+from django.conf import settings
+import uuid
 
 
-@csrf_exempt
-def guardarImagenEnS3(request):
-    fileImg = []
-    for filename, file in request.FILES.iteritems():
-        fileImg.append(filename)
-    print(fileImg)
-    return JsonResponse({'msj' : 'nadaaa!!'})
 
-# def guardarImagenEnS3(response):
+class FileUploadView(views.APIView):
+    parser_classes = [ MultiPartParser]
 
-#     fileImg =  response.FILES
+    def post(self, request, typeImage, format=None):
+        file_obj = request.data['media']
+        contentype = file_obj.name.split('.')[1]
+        print("info data : " + str(request.data) + '  content type : ' + str(contentype))
 
-
-#     s3 = boto3.client('s3', aws_access_key_id=ACCESS_KEY_ID, aws_secret_access_key=SECRET_ACCESS_KEY)
+        s3 = boto3.client('s3', aws_access_key_id=settings.ACCESS_KEY_ID, aws_secret_access_key=settings.SECRET_ACCESS_KEY)
     
-#     try:
-#         imagen = 'https://i2.wp.com/unaaldia.hispasec.com/wp-content/uploads/2013/09/f4b65-django-logo.png?ssl=1'
+        try:
+            filename = uuid.uuid4()
+            print("name file : " + str(filename))
+            url = s3.upload_fileobj(file_obj, settings.BUCKET_IMAGENES, typeImage + '/' + str(filename) + contentype, ExtraArgs={'ACL': 'public-read'})
 
-#         imageResponse = requests.get(imagen, stream=True).raw
-#         url = s3.upload_fileobj(imageResponse, BUCKET_NAME, 'asdas.png', ExtraArgs={'ACL': 'public-read'})
+            return JsonResponse({'urlImagen': str(url)})
 
-#         return JsonResponse({'urlimagen': str(url)})
+        except FileNotFoundError as error:
+            print("The file was not found")
+            return JsonResponse({'error': str(error)})
+        except NoCredentialsError as error:
+            print("Credentials not available")
+            return JsonResponse({'error': str(error)})
 
-#     except FileNotFoundError as error:
-#         print("The file was not found")
-#         return JsonResponse({'error': str(error)})
-#     except NoCredentialsError as error:
-#         print("Credentials not available")
-#         return JsonResponse({'error': str(error)})
+
+
+
+
+
     

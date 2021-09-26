@@ -14,37 +14,19 @@ from pathlib import Path
 from requests.auth import HTTPBasicAuth
 from requests.auth import HTTPDigestAuth
 from config.spring import ConfigClient
-import asyncio
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
 
 ## peticion de configuraciones al servidor de conpfiguracion
 config_client = ConfigClient(app_name='mainsystem', url='http://localhost:8888/mainsystem/default')
 config_client.get_config(auth=HTTPBasicAuth(username='root', password='secret'))
 config=config_client.config['propertySources'][0]['source']
 
-#registro con eureka server
-"""import py_eureka_client.eureka_client as eureka_client
-
-your_rest_server_port = 8099
-# The flowing code will register your server to eureka server and also start to send heartbeat every 30 seconds
-eureka_client.init(eureka_server="http://localhost:8099/eureka",
-                   app_name="mainsystem")"""
-
-#registro con pyactuator
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(config['SECRET_KEY'][1:-1])
-#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
-# SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -64,8 +46,6 @@ INSTALLED_APPS = [
     'django_filters',
 
 ]
-
-
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
