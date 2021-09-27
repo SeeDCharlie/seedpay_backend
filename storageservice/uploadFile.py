@@ -28,7 +28,7 @@ def upload_file(remote_url, bucket, file_name):
 #ejemplo peticion
 def uploadImage():
 
-    url = "http://127.0.0.1:8000/uploadimage/usuarios"
+    url = "http://127.0.0.1:8081/uploadimage/usuarios"
 
     archivo={'media': open('/home/seed/Imágenes/andugay.png', 'rb')}
     headers = {
