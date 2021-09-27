@@ -15,8 +15,6 @@ class FileUploadView(views.APIView):
     def post(self, request, typeImage, format=None):
         file_obj = request.data['media']
         contentype = file_obj.name.split('.')[1]
-        print("info data : " + str(request.data) + '  content type : ' + str(contentype))
-
         s3 = boto3.client('s3', aws_access_key_id=settings.ACCESS_KEY_ID, aws_secret_access_key=settings.SECRET_ACCESS_KEY)
     
         try:

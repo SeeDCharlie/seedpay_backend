@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from requests.auth import HTTPBasicAuth
-from requests.auth import HTTPDigestAuth
 from config.spring import ConfigClient
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
