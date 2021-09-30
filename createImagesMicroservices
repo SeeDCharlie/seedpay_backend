@@ -1,0 +1,3 @@
+//storageservice
+sudo docker build --tag storageserviceimg:latest .
+sudo docker run --name storageservice -d -p 8000:8000 storageserviceimg:latest

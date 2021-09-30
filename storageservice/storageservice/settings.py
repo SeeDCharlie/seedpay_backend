@@ -18,7 +18,8 @@ from config.spring import ConfigClient
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 ## peticion de configuraciones al servidor de conpfiguracion
-config_client = ConfigClient(app_name='sourceservice', url='http://localhost:8888/sourceservice/default')
+ipConfigService = '172.17.0.2'
+config_client = ConfigClient(app_name='sourceservice', url='http://%s:8888/sourceservice/default'%ipConfigService)
 config_client.get_config(auth=HTTPBasicAuth(username='root', password='secret'))
 config=config_client.config['propertySources'][0]['source']
 
