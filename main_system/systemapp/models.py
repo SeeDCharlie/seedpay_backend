@@ -163,7 +163,7 @@ class producto(models.Model):
     disponible = models.BooleanField(default=False)
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
-    negocio = models.ForeignKey('negocio', models.DO_NOTHING, blank=True)
+    negocio = models.ForeignKey('negocio', models.DO_NOTHING, related_name='productos', blank=True)
     categorias = models.ManyToManyField(categoria_productos, blank=True)
     calificacion =  models.DecimalField(max_digits=2, decimal_places= 1, blank=True, null=True, default=5)
     imagen_64 = models.TextField(null = True)

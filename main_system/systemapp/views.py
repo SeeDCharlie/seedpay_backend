@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from loginapp.models import usuario
 from .models import *
+from rest_framework import serializers
 from rest_framework import viewsets, filters, generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from loginapp.serializer import UsuarioSerializer
 from loginapp.models import usuario
+from rest_framework.response import Response
 from rest_framework.decorators import action, api_view
 from .serializers import *
-
+from .serializables.serializersUsuarios import *
 
 # Create your views here.
 
@@ -17,6 +19,13 @@ class UsuarioController(viewsets.ModelViewSet):
 
     queryset = usuario.objects.all().order_by('id')
     serializer_class = UsuarioSerializer
+
+    @action(detail=True, methods=['get'])
+    def negociosProductos(self, request, pk=None):
+        queryset = negocio.objects.filter(usuario=pk)
+        print(queryset)
+        serializer = negociosProductosPorUsuario(queryset, many=True)
+        return Response(serializer.data, status=200 )
 
 class NegocioController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
@@ -32,7 +41,7 @@ class ProductoController(viewsets.ModelViewSet):
     queryset = producto.objects.all().order_by('id')
     serializer_class = ProductoSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['negocio', 'nombre']
+    filterset_fields = ['negocio', 'nombre', 'negocio__usuario']
 
 class ServicioController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
@@ -69,8 +78,12 @@ class CategoriaServicioController(viewsets.ModelViewSet):
 class CategoriaProductoController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
 
-    queryset = categoria_productos.objects.all().order_by('id')
+    queryset = categoria_productos.objects.all()
     serializer_class = CategoriaProductoSerializer
+
+    @action(methods=['get'], detail=False, url_path='categoriaNegocio/' )
+    def getByCatNegocio(self, request, pk=None):
+        return Response(categoria_productos.objects.all().filter(cat_negocio=self.kwargs['cat_negocio']), status=200)
 
 class CiiuController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
