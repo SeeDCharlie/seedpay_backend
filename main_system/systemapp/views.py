@@ -32,7 +32,7 @@ class NegocioController(viewsets.ModelViewSet):
     queryset = negocio.objects.all().order_by('id')
     serializer_class = NegocioSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['usuario', 'nombre', 'categorias__nombre']
+    filterset_fields = ['usuario', 'nombre', 'categorias__nombre',  ]
 
 
 class ProductoController(viewsets.ModelViewSet):
@@ -81,9 +81,11 @@ class CategoriaProductoController(viewsets.ModelViewSet):
     queryset = categoria_productos.objects.all()
     serializer_class = CategoriaProductoSerializer
 
-    @action(methods=['get'], detail=False, url_path='categoriaNegocio/' )
-    def getByCatNegocio(self, request, pk=None):
-        return Response(categoria_productos.objects.all().filter(cat_negocio=self.kwargs['cat_negocio']), status=200)
+    @action(methods=['get'], detail=False, url_path='categoriaNegocio/(?P<catNegocio>[0-9]+)' )
+    def getByCatNegocio(self, request,catNegocio):
+        queryset = categoria_productos.objects.filter(cat_negocio=catNegocio)
+        serializer = CategoriaProductoSerializer(queryset, many=True)
+        return Response(serializer.data, status=200)
 
 class CiiuController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
