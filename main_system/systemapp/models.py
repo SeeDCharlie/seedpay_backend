@@ -243,9 +243,10 @@ class factura(models.Model):
         verbose_name = "factura"
         verbose_name_plural = "facturas"
 
+
 class carrito_compra(models.Model):
-    productos = models.ManyToManyField(producto, blank=True)
-    servicios = models.ManyToManyField(servicio, blank=True)
+    producto = models.ManyToManyField(producto, through='carrito_producto')
+    servicio = models.ManyToManyField(servicio, through='carrito_servicio', blank=True)
     facturas = models.ManyToManyField(factura, blank=True)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
@@ -258,3 +259,20 @@ class carrito_compra(models.Model):
         db_table = 'carrito_compra'
         verbose_name = "carrito de compra"
         verbose_name_plural = "carritos de compra"
+
+
+class carrito_producto(models.Model):
+    producto = models.ForeignKey('producto', on_delete=models.DO_NOTHING, db_column='producto')
+    carrito_compra = models.ForeignKey('carrito_compra', on_delete=models.DO_NOTHING, db_column='carrito_compra')
+    cantidad = models.IntegerField(null = True)
+
+    class Meta:
+        db_table = 'carrito_producto'
+
+class carrito_servicio(models.Model):
+    servicio = models.ForeignKey('servicio', on_delete=models.DO_NOTHING)
+    carrito_compra = models.ForeignKey('carrito_compra', on_delete=models.DO_NOTHING)
+    cantidad = models.IntegerField(null = True)
+
+    class Meta:
+        db_table = 'carrito_servicio'

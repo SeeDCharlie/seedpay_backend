@@ -31,8 +31,7 @@ class NegocioController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
     queryset = negocio.objects.all().order_by('id')
     serializer_class = NegocioSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['usuario', 'nombre', 'categorias__nombre',  ]
+
 
 
 class ProductoController(viewsets.ModelViewSet):
@@ -81,11 +80,6 @@ class CategoriaProductoController(viewsets.ModelViewSet):
     queryset = categoria_productos.objects.all()
     serializer_class = CategoriaProductoSerializer
 
-    @action(methods=['get'], detail=False, url_path='categoriaNegocio/(?P<catNegocio>[0-9]+)' )
-    def getByCatNegocio(self, request,catNegocio):
-        queryset = categoria_productos.objects.filter(cat_negocio=catNegocio)
-        serializer = CategoriaProductoSerializer(queryset, many=True)
-        return Response(serializer.data, status=200)
 
 class CiiuController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
@@ -108,6 +102,17 @@ class CarritoComprasController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
     queryset = carrito_compra.objects.all().order_by('id')
     serializer_class = CarritoComprasSerializer
+
+    def perform_create(self, serializer):
+        carrito = carrito_compra()
+        carrito.save()
+        productos = serializer.data['producto']
+        
+        for productoAux in productos:
+            carrito_producto(carrito_compra=carrito, producto=producto.objects.get(pk=productoAux['producto']), cantidad=productoAux['cantidad']).save()
+            
+            print("producto : " + str(producto))
+
 
 class FacturaController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
