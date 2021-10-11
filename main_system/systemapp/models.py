@@ -224,7 +224,6 @@ class factura(models.Model):
     cliente = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, related_name='cliente')
     domiciliario = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, blank=True, null = True, related_name='domiciliario')
     vendedor = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT,blank=True, null = True, related_name='vendedor')
-
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
 
     valor_recibido = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)

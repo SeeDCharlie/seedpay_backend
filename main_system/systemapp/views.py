@@ -98,20 +98,6 @@ class DepartamentoController(viewsets.ModelViewSet):
     queryset = departamento.objects.all().order_by('id')
     serializer_class = DepartamentoSerializer
 
-class CarritoComprasController(viewsets.ModelViewSet):
-    #authentication_class = (TokenAuthentication,)
-    queryset = carrito_compra.objects.all().order_by('id')
-    serializer_class = CarritoComprasSerializer
-
-    def perform_create(self, serializer):
-        carrito = carrito_compra()
-        carrito.save()
-        productos = serializer.data['producto']
-        
-        for productoAux in productos:
-            carrito_producto(carrito_compra=carrito, producto=producto.objects.get(pk=productoAux['producto']), cantidad=productoAux['cantidad']).save()
-            
-            print("producto : " + str(producto))
 
 
 class FacturaController(viewsets.ModelViewSet):
@@ -129,3 +115,16 @@ class CategoriaNegocioController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
     queryset = categoria_negocio.objects.all().order_by('id')
     serializer_class = CategoriaNegocioSerializer
+
+class CarritoComprasController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+    queryset = carrito_compra.objects.all().order_by('id')
+    serializer_class = CarritoComprasSerializer
+
+    # def perform_create(self, serializer):
+    #     carrito = carrito_compra()
+    #     carrito.save()
+    #     productos = serializer.data['producto']
+        
+    #     for productoAux in productos:
+    #         carrito_producto(carrito_compra=carrito, producto=producto.objects.get(pk=productoAux['producto']), cantidad=productoAux['cantidad']).save()

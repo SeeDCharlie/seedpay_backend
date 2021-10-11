@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import *
+from loginapp.models import *
+from loginapp.serializer import *
 
 
 class TipoUsuarioSerializer(serializers.ModelSerializer):
@@ -73,6 +75,7 @@ class CiudadSerializer(serializers.ModelSerializer):
         model = ciudad
         fields = ['id','nombre', 'departamento_id']
 
+
 class DepartamentoSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -85,13 +88,6 @@ class ProductoCarritoSerializer(serializers.ModelSerializer):
         model = carrito_producto
         fields = ['producto', 'cantidad']
 
-class CarritoComprasSerializer(serializers.ModelSerializer):
-
-    producto = ProductoCarritoSerializer(source = 'carrito_producto_set', many=True)
-
-    class Meta:
-        model = carrito_compra
-        fields = ['id','producto', 'fecha_creacion', 'fecha_modificacion']
 
 class FacturaSerializer(serializers.ModelSerializer):
 
@@ -104,3 +100,11 @@ class MetodoPagoSerializer(serializers.ModelSerializer):
     class Meta:
         model = metodo_pago
         fields = '__all__'
+
+class CarritoComprasSerializer(serializers.ModelSerializer):
+
+    producto = ProductoCarritoSerializer(source = 'carrito_producto_set', many=True)
+
+    class Meta:
+        model = carrito_compra
+        fields = ['id','producto', 'fecha_creacion', 'fecha_modificacion']

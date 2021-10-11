@@ -1,6 +1,7 @@
 from django.urls import path, include, re_path
 from rest_framework import routers
 from .views import *
+from .ventas.ventasViews import *
 from .endpoints.EndpointCategoriasProductos import EndpointCategoriaProductos
 from .endpoints.EndpointBusquedas import EndpointFiltroBusquedaGeneral
 
@@ -23,6 +24,7 @@ router.register(r'carritoCompra', CarritoComprasController)
 router.register(r'factura', FacturaController)
 router.register(r'metodoPago', MetodoPagoController)
 router.register(r'busqueda', EndpointFiltroBusquedaGeneral, basename='busquedas')
+router.register(r'ventas', VentasViews)
 
 urlpatterns = [
     path('', include(router.urls) ),
