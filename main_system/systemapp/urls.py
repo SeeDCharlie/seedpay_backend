@@ -4,6 +4,7 @@ from .views import *
 from .ventas.ventasViews import *
 from .endpoints.EndpointCategoriasProductos import EndpointCategoriaProductos
 from .endpoints.EndpointBusquedas import EndpointFiltroBusquedaGeneral
+from .qr.qrView import *
 
 router = routers.DefaultRouter()
 router.register(r'usuarios', UsuarioController)
@@ -28,4 +29,5 @@ router.register(r'ventas', VentasViews)
 
 urlpatterns = [
     path('', include(router.urls) ),
+    path('qr/<int:id>', QrView.as_view())
 ]
