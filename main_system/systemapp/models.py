@@ -225,6 +225,7 @@ class factura(models.Model):
     domiciliario = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, blank=True, null = True, related_name='domiciliario')
     vendedor = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT,blank=True, null = True, related_name='vendedor')
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
+    carrito = models.ForeignKey('carrito_compra', on_delete=models.RESTRICT, blank=True, null = True)
 
     valor_recibido = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)
     valor_devuelto = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)
@@ -252,7 +253,7 @@ class carrito_compra(models.Model):
     fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id)
 
     class Meta:
         db_table = 'carrito_compra'

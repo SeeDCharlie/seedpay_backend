@@ -30,6 +30,7 @@ class VentaSerializer(serializers.Serializer):
 
         return factura.objects.create(cliente=usuario_id,
                                              metodo_pago= metodo_pago_id,
+                                             carrito=carrito,
                                              negocio = negocio_id, 
                                              valor_total = validate_data.get('total_pagar'),
                                              valor_recibido = validate_data.get('valor_recibido'),
