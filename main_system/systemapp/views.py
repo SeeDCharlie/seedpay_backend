@@ -79,6 +79,8 @@ class CategoriaProductoController(viewsets.ModelViewSet):
 
     queryset = categoria_productos.objects.all()
     serializer_class = CategoriaProductoSerializer
+    #filter_backends = [DjangoFilterBackend]
+    #filterset_fields = ['cat_negocio__']
 
 
 class CiiuController(viewsets.ModelViewSet):
