@@ -57,7 +57,7 @@ class NegocioSerializer(serializers.ModelSerializer):
          'telefono2', 'correo', 'direccion', 'imagen_64', 'negocio_ciiu', 'ciudad', 'categorias' ]
 
 class ProductoSerializer(serializers.ModelSerializer):
-    categorias = CategoriaProductoSerializer( many=True)
+    
 
     class Meta:
         model = producto
