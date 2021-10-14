@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import  BaseUserManager,AbstractBaseUser, Permission, Group, PermissionsMixin
+from django_prometheus.models import ExportModelOperationsMixin
 
 
 
