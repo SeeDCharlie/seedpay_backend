@@ -3,7 +3,7 @@ from rest_framework import routers
 from .views import *
 from .ventas.ventasViews import *
 from .endpoints.EndpointCategoriasProductos import EndpointCategoriaProductos
-from .endpoints.EndpointBusquedas import EndpointFiltroBusquedaGeneral
+from .busquedasProductos.EndpointBusquedas import EndpointFiltroBusquedaGeneral
 from .qr.qrView import *
 
 router = routers.DefaultRouter()

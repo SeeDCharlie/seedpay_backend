@@ -1,6 +1,5 @@
 from loginapp.models import usuario
 from ..models import *
-from rest_framework import serializers
 from rest_framework import viewsets, filters, generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication

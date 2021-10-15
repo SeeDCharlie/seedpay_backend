@@ -1,3 +1,13 @@
 //storageservice
 sudo docker build --tag storageserviceimg:latest .
 sudo docker run --name storageservice -d -p 8000:8000 storageserviceimg:latest
+
+
+//Prometheus
+docker run \
+    -p 9090:9090 \
+    -v /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml \
+    prom/prometheus \
+    --config.file=/etc/prometheus/prometheus.yml
+
+docker run -d --name=prometheusseedpay -p 9090:9090/tcp -v /home/seed/Documentos/integrador_II/seedpay_backend/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus --config.file=/etc/prometheus/prometheus.yml

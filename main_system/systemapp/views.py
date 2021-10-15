@@ -31,7 +31,8 @@ class NegocioController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
     queryset = negocio.objects.all().order_by('id')
     serializer_class = NegocioSerializer
-
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['categorias__nombre']
 
 
 class ProductoController(viewsets.ModelViewSet):
@@ -122,11 +123,3 @@ class CarritoComprasController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
     queryset = carrito_compra.objects.all().order_by('id')
     serializer_class = CarritoComprasSerializer
-
-    # def perform_create(self, serializer):
-    #     carrito = carrito_compra()
-    #     carrito.save()
-    #     productos = serializer.data['producto']
-        
-    #     for productoAux in productos:
-    #         carrito_producto(carrito_compra=carrito, producto=producto.objects.get(pk=productoAux['producto']), cantidad=productoAux['cantidad']).save()
