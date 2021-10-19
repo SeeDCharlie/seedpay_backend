@@ -221,11 +221,13 @@ class departamento(models.Model):
 
 class factura(models.Model):
 
-    cliente = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, related_name='cliente')
+    cliente = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, blank=True, null = True, related_name='cliente')
     domiciliario = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, blank=True, null = True, related_name='domiciliario')
     vendedor = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT,blank=True, null = True, related_name='vendedor')
     negocio = models.ForeignKey('negocio', models.DO_NOTHING)
-    carrito = models.ForeignKey('carrito_compra', on_delete=models.RESTRICT, blank=True, null = True)
+    #carrito = models.ForeignKey('carrito_compra', on_delete=models.RESTRICT, blank=True, null = True)
+    productos = models.ManyToManyField(producto, through='factura_producto')
+    servicios = models.ManyToManyField(servicio, through='factura_servicio', blank=True)
 
     valor_recibido = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)
     valor_devuelto = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)
@@ -244,35 +246,19 @@ class factura(models.Model):
         verbose_name_plural = "facturas"
 
 
-class carrito_compra(models.Model):
-    producto = models.ManyToManyField(producto, through='carrito_producto')
-    servicio = models.ManyToManyField(servicio, through='carrito_servicio', blank=True)
-    facturas = models.ManyToManyField(factura, blank=True)
 
-    fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
-    fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
-
-    def __str__(self):
-        return str(self.id)
-
-    class Meta:
-        db_table = 'carrito_compra'
-        verbose_name = "carrito de compra"
-        verbose_name_plural = "carritos de compra"
-
-
-class carrito_producto(models.Model):
-    producto = models.ForeignKey('producto', on_delete=models.DO_NOTHING, db_column='producto')
-    carrito_compra = models.ForeignKey('carrito_compra', on_delete=models.DO_NOTHING, db_column='carrito_compra')
+class factura_producto(models.Model):
+    producto = models.ForeignKey('producto', on_delete=models.DO_NOTHING)
+    factura = models.ForeignKey('factura', on_delete=models.DO_NOTHING)
     cantidad = models.IntegerField(null = True)
 
     class Meta:
-        db_table = 'carrito_producto'
+        db_table = 'factura_producto'
 
-class carrito_servicio(models.Model):
+class factura_servicio(models.Model):
     servicio = models.ForeignKey('servicio', on_delete=models.DO_NOTHING)
-    carrito_compra = models.ForeignKey('carrito_compra', on_delete=models.DO_NOTHING)
+    factura = models.ForeignKey('factura', on_delete=models.DO_NOTHING)
     cantidad = models.IntegerField(null = True)
 
     class Meta:
-        db_table = 'carrito_servicio'
+        db_table = 'factura_servicio'

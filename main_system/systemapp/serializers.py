@@ -82,10 +82,10 @@ class DepartamentoSerializer(serializers.ModelSerializer):
         model = departamento
         fields = ['id','nombre']
 
-class ProductoCarritoSerializer(serializers.ModelSerializer):
+class FacturaProductoSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = carrito_producto
+        model = factura_producto
         fields = ['producto', 'cantidad']
 
 
@@ -101,10 +101,10 @@ class MetodoPagoSerializer(serializers.ModelSerializer):
         model = metodo_pago
         fields = '__all__'
 
-class CarritoComprasSerializer(serializers.ModelSerializer):
+"""class CarritoComprasSerializer(serializers.ModelSerializer):
 
     producto = ProductoCarritoSerializer(source = 'carrito_producto_set', many=True)
 
     class Meta:
         model = carrito_compra
-        fields = ['id','producto', 'fecha_creacion', 'fecha_modificacion']
+        fields = ['id','producto', 'fecha_creacion', 'fecha_modificacion']"""
