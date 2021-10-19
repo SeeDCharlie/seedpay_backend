@@ -118,7 +118,7 @@ PASSWORD_HASHERS = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django_prometheus.db.backends.postgresql',
         'NAME': config['DB_NAME'] ,
         'USER': config['DB_USER'],
         'PASSWORD': config['DB_PASS'],
