@@ -90,6 +90,7 @@ class FacturaProductoSerializer(serializers.ModelSerializer):
 
 class FacturaSerializer(serializers.ModelSerializer):
 
+    cliente = UsuarioSerializer()
     productos = FacturaProductoSerializer(source='factura_producto_set', many=True)
 
     class Meta:

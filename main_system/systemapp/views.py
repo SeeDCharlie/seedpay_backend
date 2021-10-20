@@ -103,7 +103,7 @@ class DepartamentoController(viewsets.ModelViewSet):
     serializer_class = DepartamentoSerializer
 
 
-class FacturaController(ListModelMixin, viewsets.GenericViewSet):
+class FacturaController(RetrieveModelMixin, ListModelMixin, viewsets.GenericViewSet):
     #authentication_class = (TokenAuthentication,)
     queryset = factura.objects.all().order_by('id')
     serializer_class = FacturaSerializer
