@@ -1,6 +1,10 @@
 //storageservice
 sudo docker build --tag storageserviceimg:latest .
-sudo docker run --name storageservice -d -p 8000:8000 storageserviceimg:latest
+sudo docker run --name storageservice -d -p 8081:8081 storageserviceimg:latest
+
+//mainsystem
+sudo docker build --tag mainsystem:latest .
+sudo docker run --name mainsystem -d -p 8000:8000 mainsystem:latest
 
 
 //Prometheus

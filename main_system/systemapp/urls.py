@@ -21,13 +21,13 @@ router.register(r'categoriaNegocio', CategoriaNegocioController)
 router.register(r'ciiu', CiiuController)
 router.register(r'ciudad', CiudadController)
 router.register(r'departamento', DepartamentoController)
-router.register(r'carritoCompra', CarritoComprasController)
 router.register(r'factura', FacturaController)
 router.register(r'metodoPago', MetodoPagoController)
-router.register(r'busqueda', EndpointFiltroBusquedaGeneral, basename='busquedas')
+# router.register(r'busqueda', EndpointFiltroBusquedaGeneral, basename='busquedas')
 router.register(r'ventas', VentasViews)
 
 urlpatterns = [
     path('', include(router.urls) ),
-    path('qr/<int:id>', QrView.as_view())
+    path('qr/<int:id>', QrView.as_view()),
+    path('buscar/<str:palabra>', EndpointFiltroBusquedaGeneral.as_view()),
 ]

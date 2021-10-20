@@ -58,7 +58,6 @@ class NegocioSerializer(serializers.ModelSerializer):
 
 class ProductoSerializer(serializers.ModelSerializer):
     
-
     class Meta:
         model = producto
         fields = ['id','nombre', 'descripcion', 'precio', 'negocio', 'disponible', 'categorias', 'negocio', 'imagen_64']
@@ -91,20 +90,15 @@ class FacturaProductoSerializer(serializers.ModelSerializer):
 
 class FacturaSerializer(serializers.ModelSerializer):
 
+    productos = FacturaProductoSerializer(source='factura_producto_set', many=True)
+
     class Meta:
         model = factura
         fields = '__all__'
+
 
 class MetodoPagoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = metodo_pago
         fields = '__all__'
-
-"""class CarritoComprasSerializer(serializers.ModelSerializer):
-
-    producto = ProductoCarritoSerializer(source = 'carrito_producto_set', many=True)
-
-    class Meta:
-        model = carrito_compra
-        fields = ['id','producto', 'fecha_creacion', 'fecha_modificacion']"""

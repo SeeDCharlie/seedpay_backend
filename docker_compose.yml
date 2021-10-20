@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  storageservice:
+    container_name: storageservice
+    build:
+      context: .
+      dockerfile: ./storageservice/Dockerfile
+    ports:
+      - "8081:8081"
+    command: python manage.py runserver 0.0.0.0:8081
+  
+  mainsystem:
+    container_name: mainsystem
+    build:
+      context: .
+      dockerfile: ./main_system/Dockerfile
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+  
+  prometheus:
+    image: prom/prometheus 
+    volumes: 
+      - ./monitoring/:/etc/prometheus
+    ports:
+      - "9090:9090"

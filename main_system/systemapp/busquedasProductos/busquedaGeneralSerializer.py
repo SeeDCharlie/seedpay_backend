@@ -4,7 +4,8 @@ from ..serializers import *
 
 class BusquedaProductoSerializer(serializers.ModelSerializer):
 
+    productos = ProductoSerializer(source='producto_set', many=True)
 
     class Meta:
         model = negocio
-        fields = ['id','nombre', 'descripcion', 'imagen_64' ]
+        fields = ['id','nombre', 'descripcion', 'imagen_64', 'productos' ]

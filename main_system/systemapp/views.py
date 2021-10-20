@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action, api_view
 from .serializers import *
 from .serializables.serializersUsuarios import *
+from rest_framework.mixins import *
 
 # Create your views here.
 
@@ -102,8 +103,7 @@ class DepartamentoController(viewsets.ModelViewSet):
     serializer_class = DepartamentoSerializer
 
 
-
-class FacturaController(viewsets.ModelViewSet):
+class FacturaController(ListModelMixin, viewsets.GenericViewSet):
     #authentication_class = (TokenAuthentication,)
     queryset = factura.objects.all().order_by('id')
     serializer_class = FacturaSerializer
@@ -118,8 +118,3 @@ class CategoriaNegocioController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
     queryset = categoria_negocio.objects.all().order_by('id')
     serializer_class = CategoriaNegocioSerializer
-
-class CarritoComprasController(viewsets.ModelViewSet):
-    #authentication_class = (TokenAuthentication,)
-    queryset = carrito_compra.objects.all().order_by('id')
-    serializer_class = CarritoComprasSerializer

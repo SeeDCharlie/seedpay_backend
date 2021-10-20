@@ -224,7 +224,7 @@ class factura(models.Model):
     cliente = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, blank=True, null = True, related_name='cliente')
     domiciliario = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, blank=True, null = True, related_name='domiciliario')
     vendedor = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT,blank=True, null = True, related_name='vendedor')
-    negocio = models.ForeignKey('negocio', models.DO_NOTHING)
+    negocio = models.ForeignKey('negocio', models.DO_NOTHING,blank=True, null = True, related_name='negocio')
     #carrito = models.ForeignKey('carrito_compra', on_delete=models.RESTRICT, blank=True, null = True)
     productos = models.ManyToManyField(producto, through='factura_producto')
     servicios = models.ManyToManyField(servicio, through='factura_servicio', blank=True)
