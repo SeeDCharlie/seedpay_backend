@@ -56,14 +56,31 @@ class VentaSerializer(serializers.Serializer):
         if not negocioaux :
             raise serializers.ValidationError("El metodo de pago no existe")
         return value
+    
+    def validate(self, data):
+        if data['valor_recibido'] < data['valor_total']:
+            raise serializers.ValidationError("el valor recibido debe ser mayor que el total a pagar")
+        return data
+        
 
     def guardarFacturaPorNegocio(self, productos, cliente= None, vendedor = None, domiciliario = None, metodo_pago = None):
-        facturas = []
-        negocios = [ negocio.objects.get(pk=id_negocio) for id_negocio  in list(dict.fromkeys([producto['negocio'] for producto in productos ]))]
+
+        negocios = list(dict.fromkeys([product['producto'].negocio for product in productos ]))
         print("negocios : " , negocios)
         for i, negocioAux in enumerate(negocios):
             facturaAux = factura(negocio=negocioAux, cliente=cliente, vendedor=vendedor, domiciliario=domiciliario, metodo_pago=metodo_pago )
-            productosPorNegocio = [producto.objects.get(pk=productoId) for productoId in productos if producto.objects.get(pk=productoId).negocio == negocioAux.id ]
-            print("productos por negocio : " , productosPorNegocio)
-            facturas.add(facturaAux)
+            facturaAux.save()
+            productosPorNegocio = [ factura_producto.objects.create(
+                                    factura=facturaAux,
+                                    producto=product['producto'], 
+                                    cantidad=product['cantidad'])
+                                    for product in productos if product['producto'].negocio == negocioAux]
+            print("productos por negocio : ", productosPorNegocio)
+            total_pagar = sum([ (prod.producto.precio * prod.cantidad)  for prod in productosPorNegocio ])
+            print("valores : ", total_pagar )
+            facturaAux.valor_total = total_pagar
+            facturaAux.valor_recibido = total_pagar
+            facturaAux.valor_devuelto = 0
+            print("productos por negocio : " , productosPorNegocio, "  total a apagar : ", total_pagar)
+            facturaAux.save(update_fields=['valor_total', 'valor_recibido', 'valor_devuelto'])
 
