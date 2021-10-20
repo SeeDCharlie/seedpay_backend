@@ -29,9 +29,12 @@ class VentaSerializer(serializers.Serializer):
                             valor_recibido = float(validate_data.get('valor_recibido')),
                             valor_devuelto =  devuelta)
         facturaAux.save()
-        
+
+        self.guardarFacturaPorNegocio(productos, cliente= cliente_id, metodo_pago=metodo_pago_id)
+
         for productoAux in productos:
             producto = factura_producto(producto=productoAux['producto'], cantidad=productoAux['cantidad'], factura=facturaAux)
+
             producto.save()
 
         return facturaAux
@@ -53,3 +56,14 @@ class VentaSerializer(serializers.Serializer):
         if not negocioaux :
             raise serializers.ValidationError("El metodo de pago no existe")
         return value
+
+    def guardarFacturaPorNegocio(self, productos, cliente= None, vendedor = None, domiciliario = None, metodo_pago = None):
+        facturas = []
+        negocios = [ negocio.objects.get(pk=id_negocio) for id_negocio  in list(dict.fromkeys([producto['negocio'] for producto in productos ]))]
+        print("negocios : " , negocios)
+        for i, negocioAux in enumerate(negocios):
+            facturaAux = factura(negocio=negocioAux, cliente=cliente, vendedor=vendedor, domiciliario=domiciliario, metodo_pago=metodo_pago )
+            productosPorNegocio = [producto.objects.get(pk=productoId) for productoId in productos if producto.objects.get(pk=productoId).negocio == negocioAux.id ]
+            print("productos por negocio : " , productosPorNegocio)
+            facturas.add(facturaAux)
+
