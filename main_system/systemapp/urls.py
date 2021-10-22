@@ -3,8 +3,9 @@ from rest_framework import routers
 from .views import *
 from .ventas.ventasViews import *
 from .endpoints.EndpointCategoriasProductos import EndpointCategoriaProductos
-from .busquedasProductos.EndpointBusquedas import EndpointFiltroBusquedaGeneral
+from .busquedasProductos.EndpointBusquedas import *
 from .qr.qrView import *
+from .informes.informeVentasUsuario.informeVentaGeneralView import InformeVentasGeneralView
 
 router = routers.DefaultRouter()
 router.register(r'usuarios', UsuarioController)
@@ -23,11 +24,12 @@ router.register(r'ciudad', CiudadController)
 router.register(r'departamento', DepartamentoController)
 router.register(r'factura', FacturaController)
 router.register(r'metodoPago', MetodoPagoController)
-# router.register(r'busqueda', EndpointFiltroBusquedaGeneral, basename='busquedas')
+# router.register(r'buscar', EndpointFiltroBusquedaGeneral, basename='busquedas')
 router.register(r'ventas', VentasViews)
 
 urlpatterns = [
     path('', include(router.urls) ),
-    path('qr/<int:id>', QrView.as_view()),
-    path('buscar/<str:palabra>', EndpointFiltroBusquedaGeneral.as_view()),
+    path('qr/<int:id>/', QrView.as_view()),
+    path('buscar/<str:palabra>/', endpointFiltroBusquedaGeneral, name='busqudageneral'),
+    path('informeVentas/', InformeVentasGeneralView.as_view(), name='informeVentaGeneral'),
 ]

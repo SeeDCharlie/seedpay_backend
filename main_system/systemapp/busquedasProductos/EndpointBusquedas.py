@@ -1,6 +1,5 @@
 from ..models import *
-from rest_framework.views import APIView
-from rest_framework import filters
+from rest_framework import viewsets
 from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -9,15 +8,14 @@ from .busquedaGeneralSerializer import BusquedaProductoSerializer
 from ..serializers import *
 from django.db.models import Q
 
-class EndpointFiltroBusquedaGeneral(APIView):
 
-    def get(self, request, palabra=None, *args, **kwargs):
-        print("palabra : " + palabra)
-        negocios = producto.objects.filter(Q(negocio__nombre__icontains = palabra) | Q(nombre__icontains = palabra) | Q(negocio__categorias__nombre__icontains = palabra) ).values('negocio').distinct('negocio')
 
-        print(negocios)
-        negociosSerialzr = BusquedaProductoSerializer(data=negocios , many=True)
-                                            
-        print("resultado : " + str(negocios))
-        return Response(negociosSerialzr.data, status=200)
+@api_view(['GET'])
+def endpointFiltroBusquedaGeneral(request, palabra="Sour Puss - Tangerine"):
+    print("palabra : " + palabra)
+    filtroNegocios = negocio.objects.filter(Q(nombre__icontains = palabra) |
+                Q(categorias__nombre__icontains = palabra) | Q(productos__nombre__icontains = palabra) | 
+                Q(productos__categorias__nombre__icontains = palabra) | Q(productos__descripcion__icontains = palabra) ).distinct('id')
+    negociosSerialzr = BusquedaProductoSerializer(filtroNegocios , many=True)
+    return Response(negociosSerialzr.data, status=200)
 

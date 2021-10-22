@@ -50,11 +50,6 @@ class VentaSerializer(serializers.Serializer):
             raise serializers.ValidationError("El metodo de pago no existe")
         return metodo
 
-    def validate_negocio(self, value):
-        negocioaux = negocio.objects.filter(pk=value).exists()
-        if not negocioaux :
-            raise serializers.ValidationError("El metodo de pago no existe")
-        return value
     
     def validate(self, data):
         if data['valor_recibido'] < data['valor_total']:
