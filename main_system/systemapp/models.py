@@ -140,7 +140,7 @@ class negocio(ExportModelOperationsMixin('negocio'), models.Model):
     correo = models.EmailField(max_length=250)
     direccion = models.CharField(max_length=100, null=True)
     ciudad = models.ForeignKey('ciudad', models.DO_NOTHING, null=True)
-    imagen_64 = models.TextField(null = True)
+    imagen_64 = models.CharField(max_length=256,null = True)
     negocio_ciiu= models.ManyToManyField(CIIU,blank=True )
     categorias = models.ManyToManyField(categoria_negocio, blank=True)
     calificacion =  models.DecimalField(max_digits=2, decimal_places= 1, blank=True, null=True, default=5)
@@ -166,7 +166,7 @@ class producto(ExportModelOperationsMixin('producto'), models.Model):
     negocio = models.ForeignKey('negocio', models.DO_NOTHING, related_name='productos', blank=True)
     categorias = models.ManyToManyField(categoria_productos, blank=True)
     calificacion =  models.DecimalField(max_digits=2, decimal_places= 1, blank=True, null=True, default=5)
-    imagen_64 = models.TextField(null = True)
+    imagen_64 = models.CharField(max_length=256,null = True)
     def __str__(self):
         return self.nombre
 
@@ -184,7 +184,7 @@ class servicio(ExportModelOperationsMixin('servicio'), models.Model):
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     negocio = models.ForeignKey('negocio', models.DO_NOTHING, blank=True)
     categorias = models.ManyToManyField(categoria_servicios, blank=True)
-    imagen_64 = models.TextField(null = True, blank=True)
+    imagen_64 = models.CharField(max_length=256,null = True)
     calificacion =  models.DecimalField(max_digits=2, decimal_places= 1, blank=True, null=True, default=5)
     def __str__(self):
         return self.nombre

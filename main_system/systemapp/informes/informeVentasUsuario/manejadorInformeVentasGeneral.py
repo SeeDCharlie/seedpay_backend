@@ -16,18 +16,19 @@ class ManejadorInformeVentasGeneral():
 
         for negocioAux in negocios:
             productosFacturas = factura_producto.objects.filter(factura__negocio = negocioAux.id, factura__fecha_creacion__gte = fecha_inicio,
-                                factura__fecha_creacion__lte = fecha_fin ).values('producto').order_by('producto').annotate(
+                                factura__fecha_creacion__lte = fecha_fin ).values('producto__nombre').order_by('producto').annotate(
                                     unidadesVendidas=Sum('cantidad'),
-                                    valorTotal=F('unidadesVendidas')*F('producto__precio') )
+                                    valorTotal=F('unidadesVendidas')*F('producto__precio'),
+                                    producto = F('producto__nombre'))
 
             print("query : ", productosFacturas)
-            new = []
-            for q in productosFacturas :
-                q['producto']= producto.objects.get(pk=q['producto']).nombre
-                new.append(q)
+            # new = []
+            # for q in productosFacturas :
+            #     q['producto']= producto.objects.get(pk=q['producto']).nombre
+            #     new.append(q)
 
             infoNegocio={'negocio':negocioAux,
-                        'productos': new,
+                        'productos': productosFacturas,
                         'total': sum([vt['valorTotal'] for vt in productosFacturas]) }
 
             infomeGeneral['negocios'].append(infoNegocio)
