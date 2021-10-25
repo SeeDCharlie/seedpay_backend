@@ -166,7 +166,7 @@ class producto(ExportModelOperationsMixin('producto'), models.Model):
     negocio = models.ForeignKey('negocio', models.DO_NOTHING, related_name='productos', blank=True)
     categorias = models.ManyToManyField(categoria_productos, blank=True)
     calificacion =  models.DecimalField(max_digits=2, decimal_places= 1, blank=True, null=True, default=5)
-    imagen_64 = models.CharField(max_length=256,null = True)
+    imagen_64 = models.CharField(max_length=256,null = True, default= 'https://seedpaybuck.s3.sa-east-1.amazonaws.com/usuarios/71276688-7770-4a41-a7a2-24bd867043a1.jpg')
     def __str__(self):
         return self.nombre
 
@@ -219,8 +219,13 @@ class departamento(models.Model):
         verbose_name = "departamento"
         verbose_name_plural = "departamentos"
 
-class factura(models.Model):
+class estado_factura(models.Model):
+    nombre = models.CharField(max_length=15)
 
+    class Meta:
+        db_table = 'estado_factura'
+
+class factura(models.Model):     
     cliente = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, blank=True, null = True, related_name='cliente')
     domiciliario = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT, blank=True, null = True, related_name='domiciliario')
     vendedor = models.ForeignKey('loginapp.usuario', on_delete=models.RESTRICT,blank=True, null = True, related_name='vendedor')
@@ -236,6 +241,8 @@ class factura(models.Model):
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
+
+    estado = models.ForeignKey(estado_factura, models.DO_NOTHING, null=True, blank=True, default = 1)
 
     def __str__(self):
         return str(self.cliente.identificacion) + ' | ' + str(self.id)

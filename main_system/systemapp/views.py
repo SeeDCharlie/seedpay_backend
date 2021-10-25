@@ -12,6 +12,7 @@ from rest_framework.decorators import action, api_view
 from .serializers import *
 from .serializables.serializersUsuarios import *
 from rest_framework.mixins import *
+from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 
 # Create your views here.
 
@@ -24,7 +25,6 @@ class UsuarioController(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'])
     def negociosProductos(self, request, pk=None):
         queryset = negocio.objects.filter(usuario=pk)
-        print(queryset)
         serializer = negociosProductosPorUsuario(queryset, many=True)
         return Response(serializer.data, status=200 )
 
@@ -43,6 +43,17 @@ class ProductoController(viewsets.ModelViewSet):
     serializer_class = ProductoSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['negocio', 'nombre', 'negocio__usuario']
+
+class ProductoPaginadoController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+
+    queryset = producto.objects.all().order_by('id')
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 15
+    serializer_class = ProductoSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['negocio', 'nombre', 'negocio__usuario']
+
 
 class ServicioController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)

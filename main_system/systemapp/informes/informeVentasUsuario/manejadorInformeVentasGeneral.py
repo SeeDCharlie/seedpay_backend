@@ -7,7 +7,6 @@ from dateutil.parser import parse
 class ManejadorInformeVentasGeneral():
 
     def ejecutar(self, peticion):
-        print("peticion validada : " , peticion['usuario'].id)
         negocios = negocio.objects.filter(usuario = peticion['usuario'].id)
         fecha_inicio = datetime.strptime("%d-%d-01"%(peticion['año'],peticion['mes']), '%Y-%m-%d')
         fecha_fin = datetime.strptime("%d-%d-%s"%(peticion['año'],peticion['mes'], str(monthrange(peticion['año'], peticion['mes'])[1])), '%Y-%m-%d')
@@ -20,12 +19,6 @@ class ManejadorInformeVentasGeneral():
                                     unidadesVendidas=Sum('cantidad'),
                                     valorTotal=F('unidadesVendidas')*F('producto__precio'),
                                     producto = F('producto__nombre'))
-
-            print("query : ", productosFacturas)
-            # new = []
-            # for q in productosFacturas :
-            #     q['producto']= producto.objects.get(pk=q['producto']).nombre
-            #     new.append(q)
 
             infoNegocio={'negocio':negocioAux,
                         'productos': productosFacturas,

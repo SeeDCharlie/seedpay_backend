@@ -5,17 +5,17 @@ from django_prometheus.models import ExportModelOperationsMixin
 
 
 class usersManager(BaseUserManager):
-    def create_superuser(self, email, identificacion, nombre, apellido, celular, telfijo, direccion, password):
-        usuario = self.create_user(email = email, identificacion = identificacion , nombre = nombre, apellido = apellido, celular = celular, telfijo = telfijo, direccion = direccion, password = password)
+    def create_superuser(self, email, identificacion, nombre, apellido, celular, direccion, password):
+        usuario = self.create_user(email = email, identificacion = identificacion , nombre = nombre, apellido = apellido, celular = celular,  direccion = direccion, password = password)
         usuario.usuario_administrador = True
         usuario.save()
         return usuario
 
-    def create_user(self, email, identificacion , nombre, apellido, celular, telfijo, direccion, password ):
+    def create_user(self, email, identificacion , nombre, apellido, celular, direccion, password ):
         if not email:
             raise ValueError('el usuario debe tener un correo electronico')
         else :
-            usuario = self.model(email = self.normalize_email(email),identificacion = identificacion , nombre = nombre, apellido = apellido, celular = celular, telfijo = telfijo, direccion = direccion )
+            usuario = self.model(email = self.normalize_email(email),identificacion = identificacion , nombre = nombre, apellido = apellido, celular = celular, direccion = direccion )
             usuario.set_password(password)
             usuario.save()
             return usuario
@@ -43,7 +43,7 @@ class usuario(AbstractBaseUser, PermissionsMixin):
     objects = usersManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = [ 'identificacion', 'nombre', 'apellido', 'celular', 'telfijo', 'direccion' ]
+    REQUIRED_FIELDS = [ 'identificacion', 'nombre', 'apellido', 'celular', 'direccion' ]
 
     def __str__(self):
         return self.email

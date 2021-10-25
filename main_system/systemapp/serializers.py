@@ -3,7 +3,7 @@ from .models import *
 from loginapp.models import *
 from loginapp.serializer import *
 
-
+#hacer un interfaz general para atributos comunes
 class TipoUsuarioSerializer(serializers.ModelSerializer):
 
     class Meta:

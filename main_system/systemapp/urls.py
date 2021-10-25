@@ -24,8 +24,8 @@ router.register(r'ciudad', CiudadController)
 router.register(r'departamento', DepartamentoController)
 router.register(r'factura', FacturaController)
 router.register(r'metodoPago', MetodoPagoController)
-# router.register(r'buscar', EndpointFiltroBusquedaGeneral, basename='busquedas')
 router.register(r'ventas', VentasViews)
+router.register(r'productoPaginado', ProductoPaginadoController)
 
 urlpatterns = [
     path('', include(router.urls) ),

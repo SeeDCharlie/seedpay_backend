@@ -17,10 +17,7 @@ class ProductoInformeVentaGeneralSerializer(serializers.Serializer):
     unidadesVendidas = serializers.IntegerField()
     valorTotal = serializers.DecimalField(max_digits=23, decimal_places=2)
 
-
 class NegocioInformeVentaGeneralSerializer(serializers.ModelSerializer):
-    # negocio_ciiu = CiiuSerializer(many=True )
-    # categorias = CategoriaNegocioSerializer( many=True)
 
     class Meta:
         model = negocio
@@ -35,8 +32,6 @@ class InformeVentasGeneralSerializer(serializers.Serializer):
 
     total = serializers.DecimalField(max_digits=13, decimal_places=2)
     negocios = NegociosInformeVentaGeneralSerializer(many=True)
-
-
 
 class peticionInfomeVentasSerializer(serializers.Serializer):
 
