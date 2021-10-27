@@ -6,6 +6,7 @@ from .endpoints.EndpointCategoriasProductos import EndpointCategoriaProductos
 from .busquedasProductos.EndpointBusquedas import *
 from .qr.qrView import *
 from .informes.informeVentasUsuario.informeVentaGeneralView import InformeVentasGeneralView
+from  .ventas.pedidos.pedidosView import PedidosView
 
 router = routers.DefaultRouter()
 router.register(r'usuarios', UsuarioController)
@@ -26,6 +27,7 @@ router.register(r'factura', FacturaController)
 router.register(r'metodoPago', MetodoPagoController)
 router.register(r'ventas', VentasViews)
 router.register(r'productoPaginado', ProductoPaginadoController)
+router.register(r'pedidos', PedidosView)
 
 urlpatterns = [
     path('', include(router.urls) ),
