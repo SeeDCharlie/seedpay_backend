@@ -1,5 +1,6 @@
 from django.db import models
 from django_prometheus.models import ExportModelOperationsMixin
+import uuid
 
 # Create your models here.
 
@@ -219,6 +220,12 @@ class departamento(models.Model):
         verbose_name = "departamento"
         verbose_name_plural = "departamentos"
 
+class estado_pedido(models.Model):
+    nombre = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'estado_pedido'
+
 class estado_factura(models.Model):
     nombre = models.CharField(max_length=15)
 
@@ -269,3 +276,16 @@ class factura_servicio(models.Model):
 
     class Meta:
         db_table = 'factura_servicio'
+
+class pedido(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    factura = models.ForeignKey('factura', on_delete=models.DO_NOTHING, null = True)
+    direccion = models.CharField(max_length=200, null = True, blank=True)
+    tel_contacto = models.IntegerField(null = False, default=0)
+    fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
+    fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
+
+    estado = models.ForeignKey(estado_pedido, models.DO_NOTHING, null=True, blank=True, default = 1)
+
+    class Meta:
+        db_table = 'pedido'

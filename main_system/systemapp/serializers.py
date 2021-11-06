@@ -103,3 +103,15 @@ class MetodoPagoSerializer(serializers.ModelSerializer):
     class Meta:
         model = metodo_pago
         fields = '__all__'
+
+class EstadoPedidoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = estado_pedido
+        fields = '__all__'
+
+class EstadoFacturaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = estado_factura
+        fields = '__all__'

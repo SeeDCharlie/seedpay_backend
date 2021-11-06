@@ -61,7 +61,7 @@ class VentaSerializer(serializers.Serializer):
 
         negocios = list(dict.fromkeys([product['producto'].negocio for product in productos ]))
         print("negocios : " , negocios)
-        for i, negocioAux in enumerate(negocios):
+        for negocioAux in negocios:
             facturaAux = factura(negocio=negocioAux, cliente=cliente, vendedor=vendedor, domiciliario=domiciliario, metodo_pago=metodo_pago )
             facturaAux.save()
             productosPorNegocio = [ factura_producto.objects.create(
@@ -74,4 +74,5 @@ class VentaSerializer(serializers.Serializer):
             facturaAux.valor_recibido = total_pagar
             facturaAux.valor_devuelto = 0
             facturaAux.save(update_fields=['valor_total', 'valor_recibido', 'valor_devuelto'])
+            pedido.objects.create(factura=facturaAux)
 
