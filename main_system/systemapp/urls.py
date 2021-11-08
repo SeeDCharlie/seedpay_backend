@@ -28,6 +28,7 @@ router.register(r'metodoPago', MetodoPagoController)
 router.register(r'ventas', VentasViews)
 router.register(r'productoPaginado', ProductoPaginadoController)
 router.register(r'pedidos', PedidosView)
+router.register(r'tipoTransporte', TipoTransporteController)
 
 urlpatterns = [
     path('', include(router.urls) ),

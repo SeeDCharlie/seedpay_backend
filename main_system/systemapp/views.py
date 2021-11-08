@@ -129,3 +129,9 @@ class CategoriaNegocioController(viewsets.ModelViewSet):
     #authentication_class = (TokenAuthentication,)
     queryset = categoria_negocio.objects.all().order_by('id')
     serializer_class = CategoriaNegocioSerializer
+
+
+class TipoTransporteController(viewsets.ModelViewSet):
+    #authentication_class = (TokenAuthentication,)
+    queryset = tipo_transporte.objects.all().order_by('id')
+    serializer_class = TipoTransporteSerializer

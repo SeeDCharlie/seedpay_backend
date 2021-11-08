@@ -145,6 +145,7 @@ class negocio(ExportModelOperationsMixin('negocio'), models.Model):
     negocio_ciiu= models.ManyToManyField(CIIU,blank=True )
     categorias = models.ManyToManyField(categoria_negocio, blank=True)
     calificacion =  models.DecimalField(max_digits=2, decimal_places= 1, blank=True, null=True, default=5)
+    valor_domicilio = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True, default=5000)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
@@ -241,6 +242,8 @@ class factura(models.Model):
     productos = models.ManyToManyField(producto, through='factura_producto')
     servicios = models.ManyToManyField(servicio, through='factura_servicio', blank=True)
 
+
+    valor_domicilio = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True, default = 5000)
     valor_recibido = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)
     valor_devuelto = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)
     valor_total = models.DecimalField(max_digits=15, decimal_places = 2, blank=True,null = True)
@@ -277,10 +280,18 @@ class factura_servicio(models.Model):
     class Meta:
         db_table = 'factura_servicio'
 
+class tipo_transporte(models.Model):
+    nombre = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'tipo_transporte'
+
 class pedido(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     factura = models.ForeignKey('factura', on_delete=models.DO_NOTHING, null = True)
     direccion = models.CharField(max_length=200, null = True, blank=True)
+    descripcion = models.CharField(max_length=500, null = True, blank = True)
+    transporte = models.ForeignKey('tipo_transporte', on_delete=models.DO_NOTHING, default=1)
     tel_contacto = models.IntegerField(null = False, default=0)
     fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)

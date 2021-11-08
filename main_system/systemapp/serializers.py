@@ -115,3 +115,9 @@ class EstadoFacturaSerializer(serializers.ModelSerializer):
     class Meta:
         model = estado_factura
         fields = '__all__'
+
+class TipoTransporteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = tipo_transporte
+        fields = '__all__'

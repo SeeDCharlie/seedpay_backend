@@ -14,7 +14,7 @@ from pathlib import Path
 from requests.auth import HTTPBasicAuth
 from requests.auth import HTTPDigestAuth
 from config.spring import ConfigClient
-
+import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 ## peticion de configuraciones al servidor de conpfiguracion
@@ -173,3 +173,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#claves epayco
+
+EPAYCO_PUBLIC_KEY=os.getenv('EPAYCO_PUBLIC_KEY')
+EPAYCO_PRIVATE_KEY=os.getenv('EPAYCO_PRIVATE_KEY')
