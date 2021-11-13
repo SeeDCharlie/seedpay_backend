@@ -5,5 +5,5 @@ from loginapp.serializer import *
 from ...serializers import *
 
 
-class VentaOnlineSerializer(serializers.Serializer):
+class ResponseEpaycoSerializer(serializers.Serializer):
     pass
