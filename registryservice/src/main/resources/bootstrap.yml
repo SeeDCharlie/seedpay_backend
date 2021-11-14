@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: registryservice
-
-  cloud:
-    config:
-      uri: http://localhost:8888
-      username: root
-      password: secret
