@@ -17,11 +17,6 @@ from config.spring import ConfigClient
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-## peticion de configuraciones al servidor de conpfiguracion
-# config_client = ConfigClient(app_name='mainsystem', url='http://localhost:8888/mainsystem/default')
-# config_client.get_config(auth=HTTPBasicAuth(username='root', password='secret'))
-# config=config_client.config['propertySources'][0]['source']
-
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
@@ -38,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.postgres',
+    #'django.contrib.postgres',
     #'django_prometheus',
     'rest_framework',
     'rest_framework.authtoken',
@@ -119,7 +114,7 @@ PASSWORD_HASHERS = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('DB_NAME') ,
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASS'),
