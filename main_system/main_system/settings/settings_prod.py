@@ -17,16 +17,11 @@ from config.spring import ConfigClient
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-## peticion de configuraciones al servidor de conpfiguracion
-# config_client = ConfigClient(app_name='mainsystem', url='http://localhost:8888/mainsystem/default')
-# config_client.get_config(auth=HTTPBasicAuth(username='root', password='secret'))
-# config=config_client.config['propertySources'][0]['source']
-
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['seedpaymain.seedcharlie.co']
 
 
 # Application definition
