@@ -8,7 +8,7 @@ if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)
 
 cwd = os.getcwd()
 sys.path.append(cwd)
-sys.path.append(cwd + '/mainsystem')  #You must add your project here
+sys.path.append(cwd + '/seedpay_backend/mainsystem')  #You must add your project here
 
 sys.path.insert(0,'/home/admseed/envSeeDPay/bin')
 sys.path.insert(0,'/home/admseed/envSeeDPay/lib/python3.9/site-packages')
