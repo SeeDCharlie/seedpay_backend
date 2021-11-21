@@ -15,7 +15,7 @@ def endpointFiltroBusquedaGeneral(request, palabra="Sour Puss - Tangerine"):
     print("palabra : " + palabra)
     filtroNegocios = negocio.objects.filter(Q(nombre__icontains = palabra) |
                 Q(categorias__nombre__icontains = palabra) | Q(productos__nombre__icontains = palabra) | 
-                Q(productos__categorias__nombre__icontains = palabra) | Q(productos__descripcion__icontains = palabra) ).distinct('id')
+                Q(productos__categorias__nombre__icontains = palabra) | Q(productos__descripcion__icontains = palabra) ).distinct()
     negociosSerialzr = BusquedaProductoSerializer(filtroNegocios , many=True)
     return Response(negociosSerialzr.data, status=200)
 
