@@ -131,7 +131,7 @@ class tipo_cuenta(models.Model):
         verbose_name = "tipo de cuenta"
         verbose_name_plural = "tipos de cuentas"
 
-class negocio(models.Model):
+class negocio(ExportModelOperationsMixin('negocio'), models.Model):
     nombre = models.CharField(max_length=70)
     descripcion = models.CharField(max_length=200)
     usuario = models.ForeignKey('loginapp.usuario', models.DO_NOTHING, null=True)
@@ -158,7 +158,7 @@ class negocio(models.Model):
         verbose_name = "negocio"
         verbose_name_plural = "negocios"
 
-class producto( models.Model):
+class producto(ExportModelOperationsMixin('producto'), models.Model):
     nombre = models.CharField(max_length=70)
     descripcion = models.CharField(max_length=200)
     precio = models.DecimalField(max_digits=15, decimal_places=2)
@@ -177,7 +177,7 @@ class producto( models.Model):
         verbose_name = "producto"
         verbose_name_plural = "productos"
 
-class servicio( models.Model):
+class servicio(ExportModelOperationsMixin('servicio'), models.Model):
     nombre = models.CharField(max_length=50, blank=True)
     descripcion = models.CharField(max_length=200, blank=True)
     precio = models.DecimalField(max_digits=15, decimal_places=2, blank=True)
