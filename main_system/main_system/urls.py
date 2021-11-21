@@ -21,6 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('loginapp.urls')),
     path('api/', include('systemapp.urls')),
-    re_path('', include('django_prometheus.urls')),
     #path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
