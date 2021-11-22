@@ -52,6 +52,9 @@ class pedidoSerializer(serializers.Serializer):
         clienteAux = usuario.objects.all().get(pk=validate_data.get('usuario')['id'])
         facturaAux = factura.objects.create(cliente = clienteAux, negocio= negocioAux, 
                                             valor_total=validate_data.get('total') )
+        pedidoAux = pedido.objects.create(factura=facturaAux, 
+                                        direccion=clienteAux.direccion,
+                                        tel_contacto=clienteAux.celular)
         descripcion = "Productos: "
 
         for productAux in validate_data.get('productos'):

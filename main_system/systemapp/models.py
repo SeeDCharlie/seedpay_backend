@@ -251,7 +251,7 @@ class factura(models.Model):
     fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)
 
-    estado = models.ForeignKey(estado_factura, models.DO_NOTHING, null=True, blank=True, default = 1)
+    estado = models.ForeignKey(estado_factura, models.DO_NOTHING, null=True, blank=True, default = 2)
 
     def __str__(self):
         return str(self.cliente.identificacion) + ' | ' + str(self.id)
