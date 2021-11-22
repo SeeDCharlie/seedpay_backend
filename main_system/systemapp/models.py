@@ -246,7 +246,7 @@ class factura(models.Model):
     valor_recibido = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)
     valor_devuelto = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null = True)
     valor_total = models.DecimalField(max_digits=15, decimal_places = 2, blank=True,null = True)
-    metodo_pago = models.ForeignKey('metodo_pago', models.DO_NOTHING)
+    metodo_pago = models.ForeignKey('metodo_pago', models.DO_NOTHING,blank=True,  null = True)
 
     fecha_creacion = models.DateTimeField(blank=True, auto_now_add=True, null = True)
     fecha_modificacion = models.DateTimeField(blank=True, auto_now=True, null = True)

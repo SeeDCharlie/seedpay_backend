@@ -7,6 +7,8 @@ from .busquedasProductos.EndpointBusquedas import *
 from .qr.qrView import *
 from .informes.informeVentasUsuario.informeVentaGeneralView import InformeVentasGeneralView
 from  .ventas.pedidos.pedidosView import PedidosView
+from  .ventas.responseEpayco.responseEpaycoView import ResponseEpaycoViews
+from  .ventas.confirmationEpayco.confirmationEpaycoView import ConfirmationEpaycoView
 
 router = routers.DefaultRouter()
 router.register(r'usuarios', UsuarioController)
@@ -29,6 +31,9 @@ router.register(r'ventas', VentasViews)
 router.register(r'productoPaginado', ProductoPaginadoController)
 router.register(r'pedidos', PedidosView)
 router.register(r'tipoTransporte', TipoTransporteController)
+router.register(r'responseCompraEpayco', ResponseEpaycoViews)
+# router.register(r'confirmationCompraEpayco', ConfirmationEpaycoView)
+
 
 urlpatterns = [
     path('', include(router.urls) ),

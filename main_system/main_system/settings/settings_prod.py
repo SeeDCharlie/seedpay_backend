@@ -21,7 +21,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['seedpaymain.seedcharlie.co']
+ALLOWED_HOSTS = ['seedpay.seedcharlie.co','seedpaymain.seedcharlie.co']
 
 
 # Application definition
