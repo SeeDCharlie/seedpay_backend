@@ -11,31 +11,26 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from requests.auth import HTTPBasicAuth
-from config.spring import ConfigClient
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-## peticion de configuraciones al servidor de conpfiguracion
-ipConfigService = 'localhost'
-config_client = ConfigClient(app_name='sourceservice', url='http://%s:8888/sourceservice/default'%ipConfigService)
-config_client.get_config(auth=HTTPBasicAuth(username='root', password='secret'))
-config=config_client.config['propertySources'][0]['source']
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(config['SECRET_KEY'][1:-1])
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['seedpaystorage.seedcharlie.co','seedpay.seedcharlie.co','seedpaymain.seedcharlie.co']
 
 
 #credenciales y datos aws
-ACCESS_KEY_ID=config['ACCESS_KEY_ID']
-SECRET_ACCESS_KEY=str(config['SECRET_ACCESS_KEY'][1:-1])
-BUCKET_IMAGENES=config['BUCKET_IMAGENES']
+ACCESS_KEY_ID=os.getenv('ACCESS_KEY_ID')
+SECRET_ACCESS_KEY=os.getenv('SECRET_ACCESS_KEY')
+BUCKET_IMAGENES=os.getenv('BUCKET_IMAGENES')
 
 # Application definition
 
@@ -117,9 +112,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-spa'
 
 TIME_ZONE = 'UTC'
+
+TIME_ZONE = 'Etc/GMT+5'
 
 USE_I18N = True
 
